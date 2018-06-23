@@ -4,7 +4,7 @@
   "description": "Unite the jobs of national Police Agencies on one site. Easy to find, easy to apply",
   "main": "server.js",
   "scripts": {
-    "test": "npm test",
+    "test": "mocha --exit",
     "start": "browser-sync start --server --files  '**/*.css, **/*.html, babel-node **/*.js' --directory --port 7777"
   },
   "repository": {
@@ -20,5 +20,10 @@
   "dependencies": {
     "express": "^4.16.3",
     "node": "^10.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0"
   }
 }
