@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: h/NSqbclLqnQNSBhtitHHSQfh6XErppx1MaIEgpiYn2cQst2LGxNwu0nAxybvGYAglWEcxAKuf18tDuRenyY43xYzqHWxQaJE6bxwnmVDuAe0oYgUi9xfrjnTJa+IPCIbmyjRMZnoDrYCw8Dsw1yfqu+/sRi/2U3KSmxFpE8A+trdmjXSWCGb6YjH8ngGYAoRUPdOXIAmVmk5UItXdgJrgW9eF8EqsXh09SqzgtLFTb+se8G7TLHHZG70IV3/TkEr5O0XqQWHDBRV4xg8fzDbMynkobAiGV5qzvOTx4FKQ5wsbnx25xHpXS+GL+pdfRHqAP8Zq/HkhTUbJwHHNUnLldrH3vuhJ4XmqTbMVMPvQIV4GS8xufOibFC9pH8+359pNtAI/U8jQgwJO5FdyCTCTL+HZ+s2CrBV3A2WCa3bc9Zam499ezgm21Cdw21EdY/xW5/ehokFO72BSAYDg3CUd1ovlsUdRuGg27bcA+QakMvdff2CplnklmnV8Kc5pGu5C0PriR+bFrBmnl+o1yFPGZrly8gXBbPlVOJFmz1dvGS6qJp3+G1NKQiUi+XFDSWZbuBPwVXLrYEUoaTBMg/v7fjN8OQDNmovbVy6zbA9Bdk3Z1bWpXcg1SO0c1IxlcOY/Ql2Uvo6AEZhuq4/jZFFc15D9s3+9iWX3YEUm/ak4k=
+  app: morning-brushlands-72649
+  on:
+    repo: sol-idsnake/CopJob
