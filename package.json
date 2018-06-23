@@ -1,0 +1,24 @@
+{
+  "name": "copjob",
+  "version": "1.0.0",
+  "description": "Unite the jobs of national Police Agencies on one site. Easy to find, easy to apply",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "browser-sync start --server --files  '**/*.css, **/*.html, babel-node **/*.js' --directory --port 7777"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sol-idsnake/CopJob.git"
+  },
+  "author": "H. Wendt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sol-idsnake/CopJob/issues"
+  },
+  "homepage": "https://github.com/sol-idsnake/CopJob#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "node": "^10.5.0"
+  }
+}
