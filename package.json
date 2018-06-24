@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --exit",
-    "start": "browser-sync start --server --files  '**/*.css, **/*.html, babel-node **/*.js' --directory --port 7777"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sol-idsnake/CopJob#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "mongoose": "^5.1.6",
     "node": "^10.5.0"
   },
   "devDependencies": {
