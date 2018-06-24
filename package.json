@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sol-idsnake/CopJob#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "mongoose": "^5.1.6",
     "node": "^10.5.0"
   },
