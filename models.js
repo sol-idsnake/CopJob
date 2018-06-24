@@ -16,7 +16,8 @@ const departmentSchema = mongoose.Schema({
 
 departmentSchema.methods.serialize = function() {
 	return {
-		name: this.title,
+		id: this._id,
+		name: this.name,
 		link: this.link,
 		state: this.state,
 		requirements: this.requirements,
