@@ -12,6 +12,7 @@ describe('Root', function() {
 		return chai.request(app)
 			.get('/')
 			.then(function(res) {
+				console.log(res)
 				expect(res).to.have.status(200)
 			})
 	})
