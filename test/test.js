@@ -141,5 +141,33 @@ describe('Department List API resource', function() {
         })
     });
   });
+
+  describe('PUT endpoint', function() {
+    it('should update fields you send over', function() {
+      const updateData = {
+        name: 'lalalallalalala',
+        description: 'something definitely not important.'
+      };
+
+      return Department
+        .findOne()
+        .then(function(department) {
+          updateData.id = department.id
+
+          return chai.request(app)
+            .put(`/update/${department.id}`)
+            .send(updateData)
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+
+          return Department.findById(updateData.id);
+        })
+        .then(function(department) {
+          expect(department.name).to.equal(updateData.name);
+          expect(department.description).to.equal(updateData.description);
+        });
+    });
+  });
 	
 });
