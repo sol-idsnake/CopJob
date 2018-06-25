@@ -20,7 +20,7 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-	const requiredFields = ["name", "link", "state", "salary", "description"];
+	const requiredFields = ["position", "name", "link", "state", "salary", "description"];
 	for(let i=0; i < requiredFields.length; i++){
 		const field = requiredFields[i];
 		if(!(field in req.body)){
@@ -32,6 +32,7 @@ router.post('/create', (req, res) => {
 
 	Department
 		.create({
+			position: req.body.position,
 			name: req.body.name,
 			link: req.body.link,
 			state: req.body.state,
@@ -56,7 +57,7 @@ router.put('/update/:id', (req, res) => {
 	};
 
 	const toUpdate = {};
-	const updateableFields = ["name", "link", "state", "salary", "description"];
+	const updateableFields = ["position", "name", "link", "state", "salary", "description"];
 
 	updateableFields.forEach(field => {
 		if (field in req.body) {

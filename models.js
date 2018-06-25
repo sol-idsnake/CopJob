@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const departmentSchema = mongoose.Schema({
+	position: {type: String, required: true},
 	name: {type: String, required: true},
 	link: {type: String, required: true},
 	state: {type: String, required: true},
@@ -17,6 +18,7 @@ const departmentSchema = mongoose.Schema({
 departmentSchema.methods.serialize = function() {
 	return {
 		id: this._id,
+		position: this.position,
 		name: this.name,
 		link: this.link,
 		state: this.state,
