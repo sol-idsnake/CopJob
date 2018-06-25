@@ -68,7 +68,16 @@ router.put('/update/:id', (req, res) => {
 		.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
 		.then(post => res.status(204).end())
 		.catch(err => res.status(500).json({message: 'Internal server error'}))
-
 });
+
+router.delete('/delete/:id', (req, res) => {
+	Department
+		.findByIdAndRemove(req.params.id)
+		.then(() => {
+			console.log(`Deleted post with ID \`${req.params.id}\``)
+			res.status(204).end()
+		})
+		.catch(err => res.status(500).json({message: 'Internal server error'}))
+})
 
 module.exports = router;
