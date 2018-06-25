@@ -108,5 +108,38 @@ describe('Department List API resource', function() {
         });
 		});
 	});
+
+  describe('POST endpoint', function() {
+    it('should add a new department', function() {
+      const newDepartment = generateDepartmentData()
+
+      return chai.request(app)
+        .post('/create')
+        .send(newDepartment)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'id', 'name', 'link', 'salary', 'description');
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.name).to.equal(newDepartment.name)
+          expect(res.body.link).to.equal(newDepartment.link)
+          expect(res.body.salary).to.equal(newDepartment.salary)
+          expect(res.body.description).to.equal(newDepartment.description)
+
+          return Department.findById(res.body.id)
+        })
+    });
+    it('should error if field is missing', function() {
+      const badRequestData = {}
+      return chai.request(app)
+        .post('/create')
+        .send(badRequestData)
+        .then(function(res){
+          expect(res).to.have.status(400)
+        })
+    });
+  });
 	
 });
