@@ -123,8 +123,9 @@ describe('Department List API resource', function() {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'id', 'name', 'link', 'salary', 'description');
+            'id', 'position', 'name', 'link', 'salary', 'description');
           expect(res.body.id).to.not.be.null;
+          expect(res.body.position).to.equal(newDepartment.position)
           expect(res.body.name).to.equal(newDepartment.name)
           expect(res.body.link).to.equal(newDepartment.link)
           expect(res.body.salary).to.equal(newDepartment.salary)
