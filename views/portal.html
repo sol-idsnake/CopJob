@@ -6,13 +6,128 @@
 	<meta name="description" content="Portal to perform department CRUD operations">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>CopJob Portal</title>
-	<link rel="stylesheet" type="text/css" href="">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="portal.css">
 </head>
 <body>
 
-	<h1>Hello Portal</h1>
+	<h1>Add Departments</h1>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="../public/portal.js"></script>
+	<main>
+		<!-- Use 'get' method when the form has no side-effects & contains only ASCII chars. -->
+		<form action="#" class="js-form" id="js-form">
+			<fieldset>
+				<legend>Enter Department information</legend>
+		
+				<!-- must use ID in 'for' for label association to work. -->
+				<label for='position'>Position</label>
+				<input id="position" type="text" name="position" placeholder="e.g. Officer, Sergeant...">
+
+				<label for='name'>Department name</label>
+				<input id="name" type='text' name='name' placeholder='New York City Police Department'>
+
+				<label for='link'>Website</label>
+				<input id='link' type='text' name='website' placeholder=''>
+
+				<label for='state'>Department state</label>
+				<input id='state' type='text' name='state' list='states'>
+					<datalist id="states">
+						<option value="AK">
+						<option value="AL">
+						<option value="AZ">
+						<option value="AR">
+						<option value="CA">
+						<option value="CO">
+						<option value="CT">
+						<option value="DE">
+						<option value="FL">
+						<option value="GA">
+						<option value="HI">
+						<option value="ID">
+						<option value="IL">
+						<option value="IN">
+						<option value="IA">
+						<option value="KS">
+						<option value="KY">
+						<option value="LA">
+						<option value="ME">
+						<option value="MD">
+						<option value="MA">
+						<option value="MI">
+						<option value="MN">
+						<option value="MS">
+						<option value="MO">
+						<option value="MT">
+						<option value="NE">
+						<option value="NV">
+						<option value="NH">
+						<option value="NJ">
+						<option value="NM">
+						<option value="NY">
+						<option value="NC">
+						<option value="ND">
+						<option value="OH">
+						<option value="OK">
+						<option value="OR">
+						<option value="PA">
+						<option value="RI">
+						<option value="SC">
+						<option value="SD">
+						<option value="TN">
+						<option value="TX">
+						<option value="UT">
+						<option value="VT">
+						<option value="VA">
+						<option value="WA">
+						<option value="WV">
+						<option value="WI">
+						<option value="WY">
+					</datalist>
+
+				<label for='age'>Minimum required age</label>
+				<input id='age' type='text' name='age' placeholder='e.g. 18, 21'>
+
+				<label>Required citizenship?</label>
+				<div class="checkbox">
+					<input id='citizen-yes' type='radio' name='citizenship' class="citizen-checkbox-yes">
+					<label for="citizen-yes">Yes</label>
+					<input id='citizen-no' type='radio' name='citizenship'class="citizen-checkbox-no">
+					<label for="citizen-no">No</label>
+				</div>
+
+				<label>Required degree:</label>
+				<div class="degree">
+					<input id='highschool' type="radio" name="degree">
+					<label for="highschool">High School</label>
+					<input id="associates" type="radio" name="degree">
+					<label for="associates">Associates (2-year)</label>
+					<input id="bachelor" type="radio" name="degree">
+					<label for="bachelor">Bachelor (4-year)</label>
+					<input id="master" type="radio" name="degree">
+					<label for="masters">Masters</label>
+					<input id="doctorate" type="radio" name="degree">
+					<label for="doctorate">Doctorate</label>
+				</div>
+
+				<label for="salary">Salary</label>
+				<div class="salary">
+					<span>$</span><input id="salary" type="number" name="salary">
+				</div>
+
+				<label for="description">Description of Position</label>
+				<textarea id="description" form="js-form"></textarea>
+				
+				<div class="controls">
+					<button class="js-form-submit" value="js-form">Submit</button>
+					<button class="js-form-reset">Reset</button>
+				</div>
+
+			</fieldset>
+
+		</form>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="portal.js"></script>
 </body>
 </html>
