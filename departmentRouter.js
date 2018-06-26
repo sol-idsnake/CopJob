@@ -20,7 +20,7 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-	const requiredFields = ["position", "name", "link", "state", "salary", "description"];
+	const requiredFields = ["position", "name", "link", "state", "requirements", "salary", "description"];
 	for(let i=0; i < requiredFields.length; i++){
 		const field = requiredFields[i];
 		if(!(field in req.body)){
@@ -29,6 +29,16 @@ router.post('/create', (req, res) => {
 			return res.status(400).send(message);
 		};
 	};
+
+	const requiredSubset = ["age", "citizenship", "degree"]
+	for(let i=0; i < requiredSubset.length; i++){
+		const field = requiredSubset[i]
+		if(!(field in req.body.requirements)) {
+			const message = `Missing \`${field}\` field in request body`
+			console.error(message)
+			return res.status(400).send(message)
+		}
+	}
 
 	Department
 		.create({
