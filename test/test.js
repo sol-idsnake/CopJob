@@ -25,6 +25,7 @@ function seedDepartments() {
 
 function generateDepartmentData() {
 	return {
+    position: faker.name.jobTitle(),
   	name: faker.company.companyName(),
   	link: faker.internet.url(),
   	state: faker.address.state(),
@@ -88,7 +89,7 @@ describe('Department List API resource', function() {
           res.body.forEach(function(department) {
           	expect(department).to.be.a('object');
           	expect(department).to.include.keys(
-          		'id', 'name', 'link', 'state', 'requirements', 'salary', 'description');
+          		'id', 'position', 'name', 'link', 'state', 'requirements', 'salary', 'description');
           	expect(department.requirements).to.include.keys(
           		'age', 'citizenship', 'degree');
           });
@@ -97,6 +98,7 @@ describe('Department List API resource', function() {
 				})
 				.then(function(department) {
         	expect(resDepartment.id).to.be.equal(department.id);
+          expect(resDepartment.position).to.be.equal(department.position)
         	expect(resDepartment.name).to.be.equal(department.name)
         	expect(resDepartment.link).to.be.equal(department.link)
         	expect(resDepartment.state).to.be.equal(department.state)
