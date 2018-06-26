@@ -10,10 +10,10 @@ function formSubmitListener() {
 		let input = fetchInput()
 		validateInput(input)
 		// call function to make ajax resquest
-		let approval
-		serverCall()
+		if (true) {
+			serverCall()
+		}
 	})
-
 }
 
 function fetchInput() {
@@ -50,8 +50,19 @@ function fetchInput() {
 
 function validateInput(departmentObject) {
 	console.log('Validating Input')
-	// make for loop and validate strings aren't empty
-	// if empty, display error message
-	const array = Object.keys(departmentObject[0])
-	console.log(array)
+	let isValid = true
+	const array = Object.keys(departmentObject)
+
+	for(let i=0; i < array.length; i++) {
+		keyname = array[i]
+		if (departmentObject[keyname] === '') {
+			// store error message object
+			const errorMsg = `Missing ${keyname} on form`
+
+			isValid = false
+			// make css error message available on page
+			$()
+		}
+	}
+	return isValid
 }
