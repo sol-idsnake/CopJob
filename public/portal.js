@@ -7,8 +7,11 @@ function formSubmitListener() {
 	$('.js-form').submit(event => {
 		event.preventDefault()
 
-		fetchInput()
-		// .then(validateInput(departmentObject))
+		let input = fetchInput()
+		validateInput(input)
+		// call function to make ajax resquest
+		let approval
+		serverCall()
 	})
 
 }
@@ -41,12 +44,14 @@ function fetchInput() {
 	const salary = $('#salary').val()
 	const description = $('#description').val()
 
-	const departmentObject = [position, name, link, state, age, citizenship, degree, salary, description]
-	return departmentObject
+	const departmentArray = {position, name, link, state, age, citizenship, degree, salary, description}
+	return departmentArray
 }
 
 function validateInput(departmentObject) {
 	console.log('Validating Input')
-
-	console.log(departmentObject)
+	// make for loop and validate strings aren't empty
+	// if empty, display error message
+	const array = Object.keys(departmentObject[0])
+	console.log(array)
 }
