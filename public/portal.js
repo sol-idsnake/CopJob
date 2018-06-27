@@ -11,7 +11,7 @@ function formSubmitListener() {
 		validateInput(input)
 		// call function to make ajax resquest
 		if (true) {
-			serverCall()
+			// serverCall()
 		}
 	})
 }
@@ -28,7 +28,7 @@ function fetchInput() {
 	let citizenship = 'yes'
 	if ($('#citizen-no').is(':checked')) {
 			citizenship = 'no'
-		}
+	}
 
 	let degree = 'High School degree required'
 	if ($('#associate').is(':checked')) {
@@ -48,21 +48,25 @@ function fetchInput() {
 	return departmentArray
 }
 
-function validateInput(departmentObject) {
+function validateInput(departmentArray) {
 	console.log('Validating Input')
 	let isValid = true
-	const array = Object.keys(departmentObject)
+	let missingBoxes = []
+	const array = Object.keys(departmentArray)
 
 	for(let i=0; i < array.length; i++) {
 		keyname = array[i]
-		if (departmentObject[keyname] === '') {
-			// store error message object
-			const errorMsg = `Missing ${keyname} on form`
+		if (departmentArray[keyname] === '') {
+			
+			const errorMsg = `Missing \'${keyname}\' field`
+			$(`#${keyname}`).toggleClass('warningBox')
+			$('.warningDiv').text(errorMsg)
 
+			missingBoxes.push(keyname)
 			isValid = false
-			// make css error message available on page
-			$()
+			
 		}
 	}
+	console.log(missingBoxes)
 	return isValid
 }

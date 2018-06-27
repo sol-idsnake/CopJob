@@ -88,3 +88,12 @@ span {
 	padding: .375rem .75rem;
 	width: 8em;
 }
+
+.warningBox {
+	border: 1px solid red;
+}
+
+.warningDiv {
+	color: red;
+	height: 25px;
+}
