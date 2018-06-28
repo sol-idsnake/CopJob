@@ -118,6 +118,72 @@ function validateInput(departmentObject) {
     }
   }
 
+  let states = [
+    "AK",
+    "AL",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY"
+  ];
+  // If user input for state does not match state abbreviation from dropwdown, throw error
+  for (let i = 0; i < states.length; i++) {
+    if ($("#state").val() !== states[i]) {
+    	console.log(departmentObject.state)
+      $(".warningDiv").append(
+        `<span>* Please select a state from the dropdown</span>`
+      );
+      $("#state").val('')
+      return
+    } else {
+
+    }
+  }
+
   // Have to add a last check to confirm that all conditions are met before setting 'isValid' to true
   // This way we ensure that inputs have values AND are selected.
   if (
@@ -133,8 +199,7 @@ function validateInput(departmentObject) {
 }
 
 function serverCall(departmentObject, callback) {
-	// var body = JSON.parse(departmentObject)
-	console.log(departmentObject)
+  console.log(departmentObject);
   const query = {
     url: "/create",
     method: "POST",

@@ -6,6 +6,9 @@ const departmentRouter = require('./departmentRouter');
 const mongoose = require('mongoose');
 const {PORT, DATABASE_URL} = require('./config');
 
+// const bodyParser = require('body-parser')
+// const jsonParser = bodyParser.json()
+
 // Use express.json for POST method
 app.use(express.static('public'));
 app.use(express.json());
