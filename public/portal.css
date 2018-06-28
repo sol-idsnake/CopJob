@@ -16,6 +16,7 @@ main {
 
 form {
   min-width: 440px;
+  max-width: 635px;
   width: 60%;
 }
 
@@ -55,6 +56,7 @@ textarea {
   height: 100px;
   margin-bottom: .5em;
   max-width: 600px;
+  min-width: 350px;
   width: 50vw;
 }
 
