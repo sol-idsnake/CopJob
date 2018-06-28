@@ -5,10 +5,13 @@ function formSubmitListener() {
     event.preventDefault();
 
     let input = fetchInput();
-    validateInput(input);
+    let valid = validateInput(input);
+
     // call function to make ajax resquest
-    if (true) {
-      // serverCall()
+    if (valid == true) {
+      serverCall(input, renderInput);
+    } else {
+      console.log("not valid");
     }
   });
 }
@@ -41,7 +44,7 @@ function fetchInput() {
   const salary = $("#salary").val();
   const description = $("#description").val();
 
-  const departmentArray = {
+  const departmentObject = {
     position,
     name,
     link,
@@ -52,19 +55,19 @@ function fetchInput() {
     salary,
     description
   };
-  return departmentArray;
+  return departmentObject;
 }
 
-function validateInput(departmentArray) {
+function validateInput(departmentObject) {
   console.log("Validating Input");
   let isValid = true;
   let missingBoxes = [];
-  const array = Object.keys(departmentArray);
+  const array = Object.keys(departmentObject);
 
   // add missing elements to missingBoxes and show a red border on missing field
   for (let i = 0; i < array.length; i++) {
     keyname = array[i];
-    if (departmentArray[keyname] !== "") {
+    if (departmentObject[keyname] !== "") {
       $(`#${keyname}`).removeClass("warningBox");
       isValid = true;
     } else {
@@ -104,27 +107,56 @@ function validateInput(departmentArray) {
     isValid = false;
   }
 
-  // remove all warning spans each validation function runs. 
+  // remove all warning spans each validation function runs.
   $(".warningDiv").empty();
-  // If items in missingBoxes are found in the departmentArray, show warning span
+  // If items in missingBoxes are found in the departmentObject, show warning span
   for (let i = 0; i < missingBoxes.length; i++) {
-    if (missingBoxes[i] in departmentArray) {
+    if (missingBoxes[i] in departmentObject) {
       $(".warningDiv").append(
         `<span>* ${missingBoxes[i]} field missing</span>`
       );
     }
   }
 
-  // Have to add a last check for whether all conditions are met before setting 'isValid' to true
-  // This way we ensure that inputs have values or are selected.
+  // Have to add a last check to confirm that all conditions are met before setting 'isValid' to true
+  // This way we ensure that inputs have values AND are selected.
   if (
     !$(".citizen").hasClass("warningBox") &&
-    !$(".degree").hasClass("warningBox") & (missingBoxes.length === 0)
+    !$(".degree").hasClass("warningBox") &&
+    missingBoxes.length === 0
   ) {
     isValid = true;
   } else {
     isValid = false;
   }
-
   return isValid;
+}
+
+function serverCall(departmentObject, callback) {
+	// var body = JSON.parse(departmentObject)
+	console.log(departmentObject)
+  const query = {
+    url: "/create",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      position: departmentObject.position,
+      name: departmentObject.name,
+      link: departmentObject.link,
+      state: departmentObject.state,
+      requirements: {
+        age: departmentObject.age,
+        citizenship: departmentObject.citizenship,
+        degree: departmentObject.degree
+      },
+      salary: departmentObject.salary,
+      description: departmentObject.description
+    }),
+    success: callback
+  };
+  $.ajax(query);
+}
+
+function renderInput() {
+  console.log("success");
 }
