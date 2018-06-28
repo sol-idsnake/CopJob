@@ -5,6 +5,9 @@ const {Department} = require('./models');
 const app = express();
 mongoose.Promise = global.Promise;
 
+// const bodyParser = require('body-parser')
+// const jsonParser = bodyParser.json()
+
 app.use(express.json());
 
 router.get('/list', (req, res) => {
