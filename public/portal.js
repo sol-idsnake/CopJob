@@ -8,10 +8,10 @@ function formSubmitListener() {
     let valid = validateInput(input);
 
     // call function to make ajax resquest
-    if (valid == true) {
+    if (valid) {
       serverCall(input, renderInput);
     } else {
-      console.log("not valid");
+      console.log("trigger function for when ");
     }
   });
 }
@@ -170,18 +170,22 @@ function validateInput(departmentObject) {
     "WI",
     "WY"
   ];
-  // If user input for state does not match state abbreviation from dropwdown, throw error
+  let isValidState = false
+  // check if user's state input equal state abbreviation in 'states' array
+  // set 'isValidState' to true if it does
   for (let i = 0; i < states.length; i++) {
-    if ($("#state").val() !== states[i]) {
-    	console.log(departmentObject.state)
-      $(".warningDiv").append(
-        `<span>* Please select a state from the dropdown</span>`
+  	if ($("#state").val() == states[i]) {
+  		isValidState = true
+  	}
+  }
+  
+  // If user input for state does not match state abbreviation from dropwdown, throw error
+  if (!isValidState) {
+  	$(".warningDiv").append(
+        `<span class='state-warning'>* Please select a valid state from the dropdown</span>`
       );
-      $("#state").val('')
-      return
-    } else {
-
-    }
+  } else {
+  	$('.warningDiv').find('.state-warning').remove();
   }
 
   // Have to add a last check to confirm that all conditions are met before setting 'isValid' to true
@@ -199,7 +203,6 @@ function validateInput(departmentObject) {
 }
 
 function serverCall(departmentObject, callback) {
-  console.log(departmentObject);
   const query = {
     url: "/create",
     method: "POST",

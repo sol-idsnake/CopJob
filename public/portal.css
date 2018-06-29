@@ -45,6 +45,7 @@ input {
 
 input[type="text"] {
   margin-bottom: 1em;
+  padding-left: .5em;
   width: 50%;
 }
 
