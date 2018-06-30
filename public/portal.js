@@ -64,7 +64,7 @@ function validateInput(departmentObject) {
   let missingBoxes = [];
   const array = Object.keys(departmentObject);
 
-  // add missing elements to missingBoxes and show a red border on missing field
+  // add missing elements to missingBoxes and show a red border on missing input boxes
   for (let i = 0; i < array.length; i++) {
     keyname = array[i];
     if (departmentObject[keyname] !== "") {
@@ -227,4 +227,7 @@ function serverCall(departmentObject, callback) {
 
 function renderInput() {
   console.log("success");
+  $('.success').fadeTo(400, 1, function() {
+	  $('.success').delay(2000).fadeTo(800, 0)
+	})
 }
