@@ -13,7 +13,16 @@
 
 <body>
 
-  <h1>Add Departments</h1>
+  <header>
+    <div class="wrapper">
+      <h1>CopJob</h1>
+      <nav>
+        <ul>
+          <li>Database</li>
+          <li>Create</li>
+        </ul>
+    </div>
+  </header>
 
   <main>
     <!-- Use 'get' method when the form has no side-effects & contains only ASCII chars. -->
@@ -22,7 +31,7 @@
         <legend>Enter Department information</legend>
 
         <!-- must use ID in 'for' for label association to work. -->
-        <label for='position'>Position</label>
+        <label for='position'>What position is being sought?</label>
         <input id="position" type="text" name="position" placeholder="e.g. Officer, Sergeant...">
 
         <label for='name'>Department name</label>
@@ -31,7 +40,7 @@
         <label for='link'>Website</label>
         <input id='link' type='text' name='website' placeholder=''>
 
-        <label for='state'>Department state</label>
+        <label for='state'>In which state is the department? (abbreviation)</label>
         <input id='state' type='text' name='state' list='states'>
         <datalist id="states">
 					<option value="AK">
@@ -111,7 +120,7 @@
           <label for="doctorate">Doctorate</label>
         </div>
 
-        <label for="salary">Salary</label>
+        <label for="salary">Salary (Minimum starting point)</label>
         <div class="salary">
           <span>$</span><input id="salary" type="number" name="salary">
         </div>
@@ -123,6 +132,7 @@
           <button class="js-form-submit" value="js-form">Submit</button>
           <button class="js-form-reset">Reset</button>
         </div>
+        <div class="success"><i>Department added successfully</i></div>
         <div class="warningDiv"></div>
       </fieldset>
 
