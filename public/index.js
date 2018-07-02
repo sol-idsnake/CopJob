@@ -19,12 +19,17 @@ function renderDatabase(res) {
   res.forEach((item, index) => {
     // ternary: if index divisible by 2, set className to gray
     const className = index % 2 == 0 ? "gray" : "";
+    console.log(item.link)
+    // shorten url
+    let string = `${item.link}`;
+    let sliced = string.substring(0, 15)
+
     $(".list").append(
       `<li class="${className}" id="${item.id}">
       <span class="name">${item.name}</span>
       <span class="state">${item.state}</span>
       <span class="position">${item.position}</span>
-      <span class="link">${item.link}</span>
+      <span class="link"><a href="${item.link}" target="_blank">${sliced}...</a></span>
       <i class="fas fa-trash-alt"></i>
       <i class="fas fa-pencil-alt"></i>
       </li>`
