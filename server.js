@@ -13,13 +13,17 @@ const {PORT, DATABASE_URL} = require('./config');
 app.use(express.static('public'));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get("/portal", (req, res) => {
   res.sendFile(__dirname + '/views/portal.html')
 })
+
+// app.get("/index", (req, res) => {
+//   res.sendFile(__dirname + '/views/index.html')
+// })
 
 app.use("/", departmentRouter);
 
