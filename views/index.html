@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="name">
-	<meta name="description" content="...">
+	<meta name="author" content="H.W.">
+  <meta name="description" content="Portal to display all departments in the collection">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>CopJob</title>
-	<link rel="stylesheet" type="text/css" href="../index-style.css">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="index.css">
 </head>
-<body>
-	<h1>Hello world</h1>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="../public/index.js"></script>
+<body>
+
+  <header>
+    <div class="wrapper">
+      <h1>CopJob</h1>
+      <nav>
+        <ul>
+          <li><a href="/index">Database</a></li>
+          <li><a href="/portal">Create</a></li>
+        </ul>
+    </div>
+  </header>
+
+  <!-- Change views via .list flex-direction as option -->
+  <main>
+  	<input type="search" name="">
+  	<section>
+  		<ul class="list"></ul>
+      <button class="sort">Sort</button>
+  	</section>
+  </main>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="index.js"></script>
 </body>
 </html>
