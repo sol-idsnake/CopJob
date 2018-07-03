@@ -161,7 +161,6 @@ span {
 
 .success {
   color: green;
-  /*display: none;*/
   min-height: 25px;
   opacity: 0;
 }
