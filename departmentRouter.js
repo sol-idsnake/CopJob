@@ -81,13 +81,20 @@ router.put('/update/:id', (req, res) => {
 	};
 
 	const toUpdate = {};
-	const updateableFields = ["position", "name", "link", "state", "salary", "description"];
+	const updateableFields = ["position", "name", "link", "state", "requirements", "salary", "description"];
+	const updateableSubFields = ["age", "citizenship", "degree"]
 
 	updateableFields.forEach(field => {
 		if (field in req.body) {
 			toUpdate[field] = req.body[field];
 		};
 	});
+
+	updateableSubFields.forEach(field => {
+		if (field in req.body.requirements) {
+			toUpdate.requirements[field] = req.body.requirements[field]
+		}
+	})
 
 	Department
 		.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
