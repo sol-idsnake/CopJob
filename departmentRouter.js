@@ -22,6 +22,17 @@ router.get('/list', (req, res) => {
 		})
 });
 
+router.get('/list/:id', (req, res) => {
+	console.log(req.params)
+  Department
+    .findById(req.params.id)
+    .then(department => res.json(department.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
 router.post('/create', (req, res) => {
 	const requiredFields = ["position", "name", "link", "state", "requirements", "salary", "description"];
 	for(let i=0; i < requiredFields.length; i++){
