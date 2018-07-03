@@ -14,12 +14,23 @@ header {
   display: flex;
   justify-content: center;
   height: 60px;
-  margin-bottom: 1.5em;
 }
 
 main {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+}
+
+aside {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+section {
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -29,7 +40,7 @@ a {
 
 h1 {
   color: white;
-  margin: .3em 0;
+  margin: 0.3em 0;
 }
 
 nav > ul {
@@ -47,18 +58,13 @@ nav > ul > li {
   border-bottom: 3px solid black;
   display: flex;
   height: 60px;
-  letter-spacing: .10em;
+  letter-spacing: 0.1em;
   margin-right: 1.5em;
   text-align: center;
 }
 
 nav > ul > li:hover {
   border-bottom: 3px solid #454cff;
-}
-
-section > ul { 
-  line-height: 1.5em;
-  list-style-type: none;
 }
 
 input[type="search"] {
@@ -70,26 +76,38 @@ span {
   width: 10em;
 }
 
-.wrapper { 
+span > a {
+  color: black;
+  text-decoration: underline;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+}
+
+i {
+  align-self: center;
+  margin-right: 0.5em;
+}
+
+.wrapper {
   display: flex;
   justify-content: space-around;
-  width: 80%
+  width: 80%;
 }
 
 .list {
   color: black;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  line-height: 1.5em;
+  list-style-type: none;
 }
 
 .gray {
   background: #ccc;
-}
-
-i {
-  float: right;
-  margin-right: .5em;
 }
 
 .fa-trash-alt {
@@ -99,7 +117,7 @@ i {
 .controls {
   display: flex;
   justify-content: center;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 .js-delete-confirm {
@@ -126,7 +144,15 @@ i {
 }
 
 .warningConfirm {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  height: 90px;
+}
+
+.confirmMessage {
+  margin-bottom: 0.5em;
+  width: unset;
+}
+
+.success {
+  color: green;
+  width: unset;
 }
