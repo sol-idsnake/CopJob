@@ -1,11 +1,12 @@
 $(displaySite);
 
 function displaySite() {
-  showDatabase();
-  deleteItem();
+  requestDatabaseItems();
+  requestDeleteItem();
+  requestUpdateItem();
 }
 
-function showDatabase() {
+function requestDatabaseItems() {
   const query = {
     url: "/list",
     method: "GET",
@@ -19,7 +20,7 @@ function renderDatabase(res) {
   res.forEach((item, index) => {
     // ternary: if index divisible by 2, set className to gray
     const className = index % 2 == 0 ? "gray" : "";
-    // console.log(item.link)
+
     // shorten url
     let string = `${item.link}`;
     let sliced = string.substring(0, 15);
@@ -39,7 +40,7 @@ function renderDatabase(res) {
   });
 }
 
-function deleteItem() {
+function requestDeleteItem() {
   $(".list").on("click", ".fa-trash-alt", event => {
     const itemId = $(event.currentTarget)
       .parent()
@@ -48,12 +49,11 @@ function deleteItem() {
       .siblings("span.name")
       .text();
 
-    confirmDelete(itemName, itemId);
+    confirmDeleteItem(itemName, itemId);
   });
 }
 
-function confirmDelete(itemName, itemId) {
-  console.log(itemId);
+function confirmDeleteItem (itemName, itemId) {
   $(".warningConfirm").append(`
 		<span class="confirmMessage">Remove item: ${itemName}?</span>
 		<div>
@@ -70,7 +70,7 @@ function confirmDelete(itemName, itemId) {
       headers: {
         id: `${itemId}`
       },
-      success: renderConfirm
+      success: confirmDeleteMessage
     };
     $.ajax(query);
     reload();
@@ -81,7 +81,7 @@ function confirmDelete(itemName, itemId) {
   });
 }
 
-function renderConfirm(itemId) {
+function confirmDeleteMessage(itemId) {
   $(".warningConfirm")
     .append(
       `<span class="success">Successfully deleted item ID ${
@@ -92,7 +92,73 @@ function renderConfirm(itemId) {
     .fadeTo(800, 0);
 }
 
+function requestUpdateItem() {
+	$('.list').on('click', '.fa-pencil-alt', event => {
+		$('.listWrapper').hide()
+		$('.updateWrapper').show()
+		
+		const itemId = $(event.currentTarget)
+			.parent()
+			.attr("id");
+		const query = {
+			url: `/list/${itemId}`,
+			method: "GET",
+			success: insertFormData
+		};
+		$.ajax(query)
+	})
+}
+
+function insertFormData(res) {
+	console.log(res)
+	$('.warningConfirm').append(`Reviewing Item ID: ${res.id}`)
+	$('#position').val(`${res.position}`)
+	$('#name').val(`${res.name}`)
+	$('#link').val(`${res.link}`)
+	$('#state').val(`${res.state}`)
+	$('#age').val(`${res.requirements.age}`)
+	$('#salary').val(`${res.salary}`)
+	$('#description').val(`${res.description}`)
+
+	// pre-set citizenship radtio button
+	if (res.requirements.citizenship === "yes") {
+		$("#citizen-yes").prop("checked", true)
+	} else {
+		$("#citizen-no").prop("checked", true)
+	}
+
+	// pre-set degree radio button
+	if (res.requirements.degree === "High School degree required") {
+		$('#highschool').prop("checked", true)
+	} else if (res.requirements.degree === "Associate's degree required (2-years)") {
+		$("#associate").prop("checked", true)
+	} else if (res.requirements.degree === "Bachelor degree required (4-years)") {
+		$("#bachelor").prop("checked", true)
+	} else if (res.requirements.degree === "Master's degree required") {
+		$("#masters").prop("checked", true)
+	} else if (res.requirements.degree === "PhD required") {
+		$("#doctorate").prop("checked", true)
+	}
+
+	$('.js-form-reset').on('click', event => {
+		event.preventDefault()
+		$('.warningConfirm').empty()
+		$('.updateWrapper').empty()
+		$('.listWrapper').show()
+		reload()
+	})
+
+	formSubmitListener()
+	inner(res)
+
+	
+}
+
+function inner(res) {
+	console.log(res)
+}
+
 function reload() {
   $(".list").empty();
-  showDatabase();
+  requestDatabaseItems();
 }

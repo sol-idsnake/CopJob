@@ -67,10 +67,6 @@ nav > ul > li:hover {
   border-bottom: 3px solid #454cff;
 }
 
-input[type="search"] {
-  width: 20em;
-}
-
 span {
   display: inline-block;
   width: 10em;
@@ -89,6 +85,57 @@ li {
 i {
   align-self: center;
   margin-right: 0.5em;
+}
+
+form {
+  min-width: 440px;
+  max-width: 635px;
+  width: 60%;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+legend {
+  background-color: #000;
+  color: #fff;
+  margin-bottom: 2em;
+  padding: 3px 6px;
+}
+
+label {
+  font-weight: 700;
+  line-height: 1em;
+  margin-bottom: 0.5em;
+}
+
+input {
+  line-height: 1.5em;
+}
+
+input[type="text"] {
+  margin-bottom: 1em;
+  padding-left: .5em;
+  width: 50%;
+}
+
+input[type="number"] {
+  margin-bottom: 1em;
+}
+
+input[type="search"] {
+  width: 20em;
+}
+
+textarea {
+  height: 100px;
+  margin-bottom: .5em;
+  max-width: 600px;
+  min-width: 350px;
+  width: 50vw;
 }
 
 .wrapper {
@@ -120,7 +167,7 @@ i {
   margin-bottom: 0.5em;
 }
 
-.js-delete-confirm {
+.js-delete-confirm, .js-form-submit {
   background: #007bff;
   border-radius: 0.25rem;
   border: 1px solid transparent;
@@ -132,7 +179,7 @@ i {
   width: 8em;
 }
 
-.js-delete-abort {
+.js-delete-abort, .js-form-reset {
   background-color: #dc3545;
   border-radius: 0.25rem;
   border: 1px solid transparent;
@@ -147,6 +194,10 @@ i {
   height: 90px;
 }
 
+.updateConfirm {
+  height: 90px;
+}
+
 .confirmMessage {
   margin-bottom: 0.5em;
   width: unset;
@@ -155,4 +206,39 @@ i {
 .success {
   color: green;
   width: unset;
+}
+
+.updateWrapper {
+  display: none;
+}
+
+.citizen {
+  margin-bottom: 0.5em;
+  width: 150px;
+}
+
+.degree {
+  margin-bottom: 0.5em;
+}
+
+.citizen label,
+.degree label {
+  font-weight: 400;
+  margin: 0 1em 0 0;
+}
+
+.success {
+  color: green;
+  min-height: 25px;
+  opacity: 0;
+}
+
+.salary > span {
+  display: inline;
+  margin-right: 0.15em;
+  vertical-align: middle;
+}
+
+.salaryInp {
+  width: 46%;
 }
