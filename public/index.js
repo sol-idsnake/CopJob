@@ -110,7 +110,6 @@ function requestUpdateItem() {
 }
 
 function insertFormData(res) {
-	console.log(res)
 	$('.warningConfirm').append(`Reviewing Item ID: ${res.id}`)
 	$('#position').val(`${res.position}`)
 	$('#name').val(`${res.name}`)
@@ -148,10 +147,16 @@ function insertFormData(res) {
 		reload()
 	})
 
-	formSubmitListener()
-	inner(res)
+	$('.js-form-submit').on('click', event => {
+		event.preventDefault()
 
-	
+		// fetchInput & validateInput get shared by index & portal from validateInput.js
+		let input = fetchInput()
+		let validated = validateInput(input)
+		if (validated) {
+			inner(input)
+		}
+	})	
 }
 
 function inner(res) {
