@@ -5,7 +5,7 @@ function fetchInput() {
   const name = $("#name").val();
   const link = $("#link").val();
   const state = $("#state").val();
-  const age = $("#age").val();
+  const age = parseInt($("#age").val(), 10);
 
   let citizenship = "yes";
   if ($("#citizen-no").is(":checked")) {
@@ -31,9 +31,11 @@ function fetchInput() {
     name,
     link,
     state,
-    age,
-    citizenship,
-    degree,
+    requirements: {
+      age,
+      citizenship,
+      degree
+    },
     salary,
     description
   };
