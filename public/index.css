@@ -12,8 +12,8 @@ body {
 header {
   background: black;
   display: flex;
-  justify-content: center;
   height: 60px;
+  justify-content: center;
 }
 
 main {
@@ -24,8 +24,12 @@ main {
 aside {
   align-items: center;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+}
+
+aside > span {
+  width: unset;
 }
 
 section {
@@ -47,15 +51,15 @@ nav > ul {
   align-items: center;
   display: flex;
   height: 60px;
-  margin: 0;
   list-style-type: none;
+  margin: 0;
   padding: 0;
 }
 
 nav > ul > li {
   align-items: center;
-  border-top: 3px solid black;
   border-bottom: 3px solid black;
+  border-top: 3px solid black;
   display: flex;
   height: 60px;
   letter-spacing: 0.1em;
@@ -69,12 +73,16 @@ nav > ul > li:hover {
 
 span {
   display: inline-block;
-  width: 10em;
 }
 
 span > a {
   color: black;
   text-decoration: underline;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -85,11 +93,15 @@ li {
 i {
   align-self: center;
   margin-right: 0.5em;
+  opacity: .7;
+}
+i:hover {
+  opacity: 1;
 }
 
 form {
-  min-width: 440px;
   max-width: 635px;
+  min-width: 440px;
   width: 60%;
 }
 
@@ -148,9 +160,44 @@ textarea {
   color: black;
   display: flex;
   flex-direction: column;
-  width: 90%;
   line-height: 1.5em;
   list-style-type: none;
+}
+
+.list > li {
+  padding: .25em 0 .25em .5em;
+}
+
+.tab {
+  background: #aad0e6;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  justify-content: flex-start;
+  line-height: 2em;
+}
+
+.name {
+  width: 20em;
+}
+
+.state {
+  width: 8em;
+}
+
+.age {
+  width: 5em;
+}
+
+.citizenship {
+  width: 7em;
+}
+
+.link {
+  width: 15em;
+}
+
+.position {
+  width: 10em;
 }
 
 .gray {
@@ -230,7 +277,6 @@ textarea {
 .success {
   color: green;
   min-height: 25px;
-  opacity: 0;
 }
 
 .salary > span {
