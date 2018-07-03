@@ -42,7 +42,7 @@ function serverCall(departmentObject, callback) {
 function renderInput() {
   resetForm();
 
-  $(".success").fadeTo(400, 1, function() {
+  $(".success").fadeTo(0, 1, function() {
     $(".success")
       .delay(2000)
       .fadeTo(800, 0);
