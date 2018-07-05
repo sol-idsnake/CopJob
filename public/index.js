@@ -115,7 +115,9 @@ function requestUpdateItem() {
 
     const itemId = $(event.currentTarget)
       .parent()
+      .parent()
       .attr("id");
+      console.log(itemId)
     const query = {
       url: `/list/${itemId}`,
       method: "GET",
@@ -244,6 +246,7 @@ function requestViewItem() {
     $("#doctorate").prop("disabled", true);
 
     const itemId = $(event.currentTarget)
+      .parent()
       .parent()
       .attr("id");
     const query = {
