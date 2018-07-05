@@ -94,8 +94,11 @@ router.put("/update/:id", (req, res) => {
     "salary",
     "description"
   ];
-  const updateableSubFields = ["age", "citizenship", "degree"];
-
+  const updateableSubFields = [
+    "age",
+    "citizenship",
+    "degree"
+  ];
   updateableFields.forEach(field => {
     if (field in req.body) {
       toUpdate[field] = req.body[field];
@@ -104,7 +107,7 @@ router.put("/update/:id", (req, res) => {
 
   updateableSubFields.forEach(field => {
     if (field in req.body.requirements) {
-      toUpdate[field] = req.body.requirements[field];
+      toUpdate.requirements[field] = req.body.requirements[field];
     }
   });
 
