@@ -1,0 +1,104 @@
+/*.wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.list {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5em;
+  list-style-type: none;
+}
+
+.list > li {
+  
+}
+
+.tab {
+  background: #aad0e6;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  justify-content: flex-start;
+  line-height: 2em;
+}
+
+
+
+
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5em;
+}*/
+
+.list {
+  width: 90%;
+}
+
+.list > li {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: .25em .5em .25em .5em;
+}
+
+.tab {
+  background: #aad0e6;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  line-height: 2em;
+}
+
+.name {
+  grid-column: 1/2;
+}
+
+.state {
+  grid-column: 2/3;
+}
+
+.age {
+  grid-column: 3/4;
+}
+
+.citizenship {
+  grid-column: 4/5;
+}
+
+.position {
+  grid-column: 5/6;
+}
+
+.link {
+  grid-column: 6/7;
+  overflow: hidden;
+}
+
+.link:after {
+  content: "";
+  grid-column: 7/8;
+}
+
+.actions {
+  justify-self: end;
+  grid-column: 7/8;
+}
+
+.fas {
+  margin-right: .25em;
+}
+
+.fa-eye {
+  color: darkolivegreen;
+}
+
+.fa-trash-alt {
+  color: #d30000;
+}
+
+.fa-pencil-alt {
+  color: saddlebrown;
+}
