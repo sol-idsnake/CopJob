@@ -11,12 +11,12 @@ function requestDatabaseItems() {
   const query = {
     url: "/list",
     method: "GET",
-    success: renderDatabase
+    success: renderDatabaseItem
   };
   $.ajax(query);
 }
 
-function renderDatabase(res) {
+function renderDatabaseItem(res) {
   $(".list").append(`
 		<li class="tab">
 		<span class="name">Name</span>
@@ -27,6 +27,7 @@ function renderDatabase(res) {
 		<span class="link">Link</span>
 		</li>
 		`);
+
   res.forEach((item, index) => {
     // ternary: if index divisible by 2, set className to gray
     const className = index % 2 == 0 ? "gray" : "";
@@ -45,9 +46,11 @@ function renderDatabase(res) {
       <span class="link"><a href="//${
         item.link
       }" target="_blank">${sliced}...</a></span>
+      <span class="actions">
       <i class="fas fa-eye"></i>
       <i class="fas fa-pencil-alt"></i>
       <i class="fas fa-trash-alt"></i>
+      </span>
       </li>`
     );
   });
