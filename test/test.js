@@ -97,6 +97,7 @@ describe('Department List API resource', function() {
           return Department.findById(resDepartment.id);
 				})
 				.then(function(department) {
+          console.log(department)
         	expect(resDepartment.id).to.be.equal(department.id);
           expect(resDepartment.position).to.be.equal(department.position)
         	expect(resDepartment.name).to.be.equal(department.name)
@@ -123,7 +124,7 @@ describe('Department List API resource', function() {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'id', 'position', 'name', 'link', 'salary', 'description');
+            'id', 'position', 'name', 'requirements', 'link', 'salary', 'description');
           expect(res.body.id).to.not.be.null;
           expect(res.body.position).to.equal(newDepartment.position)
           expect(res.body.name).to.equal(newDepartment.name)
@@ -148,7 +149,10 @@ describe('Department List API resource', function() {
   describe('PUT endpoint', function() {
     it('should update fields you send over', function() {
       const updateData = {
-        name: 'lalalallalalala',
+        name: 'This is only a test',
+        requirements: {
+          age: 99
+        },
         description: 'something definitely not important.'
       };
 
@@ -168,6 +172,7 @@ describe('Department List API resource', function() {
         })
         .then(function(department) {
           expect(department.name).to.equal(updateData.name);
+          expect(department.requirements.age).to.equal(updateData.requirements.age)
           expect(department.description).to.equal(updateData.description);
         });
     });
