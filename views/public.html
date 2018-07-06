@@ -7,8 +7,7 @@
   <meta name="description" content="Find jobs in law enforcement throughout the United States.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>CopJob</title>
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700|Kalam:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="public.css">
   <title>CopJob</title>
@@ -37,14 +36,28 @@
 			<span class="allSpan">
 				<span>Browse all opportunities</span> 
 				<i class="far fa-arrow-alt-circle-right fa-2x"></i></span>
-			<span>or select a state below</span>
+			<span>or select parameters below</span>
   	</section>
 
   	<section class="allJobsSection">
   		<ul class="listItems"></ul>
   	</section>
   	
-  	<section class="stateSelector"></section>
+  	<section class="stateSelector">
+      <!-- <form> -->
+        <!-- <fieldset> -->
+          <input type="text" name="search-keywords" id="js-search-keywords" placeholder="Search for department name, state, or position">
+          <select name="search-category" id="search-category">
+            <option>Name</option>
+            <option>State</option>
+            <option>Position</option>
+          </select>
+          <input type="button" id="js-submit-search" value="Search">
+          <!-- <button id="js-submit-search">Search</button> -->
+      
+        <!-- </fieldset> -->
+      <!-- </form> -->
+    </section>
   	
   </main>
 
