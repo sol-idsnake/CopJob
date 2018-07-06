@@ -2,6 +2,7 @@ $(getStarted)
 
 function getStarted() {
 	showAllJobs()
+	requestSearch()
 }
 
 function showAllJobs() {
@@ -18,6 +19,10 @@ function showAllJobs() {
 	    success: renderDatabaseItems
 	  };
 	  $.ajax(query);
+	})
+
+	$('.fa-arrow-alt-circle-left').on('click', () => {
+		location.reload();
 	})
 }
 
@@ -37,4 +42,15 @@ function renderDatabaseItems(res) {
 	})
 
 	$('.topDiv').append(`<span class="deptCount">Total departments in database: ${res.length}</span>`)
+}
+
+function requestSearch() {
+	$('#js-submit-search').on('click', event => {
+		event.preventDefault()
+
+		let keyword = $('#js-search-keywords').val()
+		let category = $('#search-category').val()
+
+		console.log(keyword + ' ' + category)
+	})
 }
