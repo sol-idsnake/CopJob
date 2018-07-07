@@ -27,9 +27,9 @@ function serverCall(departmentObject, callback) {
       link: departmentObject.link,
       state: departmentObject.state,
       requirements: {
-        age: departmentObject.age,
-        citizenship: departmentObject.citizenship,
-        degree: departmentObject.degree
+        age: departmentObject.requirements.age,
+        citizenship: departmentObject.requirements.citizenship,
+        degree: departmentObject.requirements.degree
       },
       salary: departmentObject.salary,
       description: departmentObject.description
