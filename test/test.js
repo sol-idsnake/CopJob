@@ -97,7 +97,6 @@ describe('Department List API resource', function() {
           return Department.findById(resDepartment.id);
 				})
 				.then(function(department) {
-          console.log(department)
         	expect(resDepartment.id).to.be.equal(department.id);
           expect(resDepartment.position).to.be.equal(department.position)
         	expect(resDepartment.name).to.be.equal(department.name)
@@ -110,6 +109,21 @@ describe('Department List API resource', function() {
         	expect(resDepartment.description).to.be.equal(department.description)
         });
 		});
+
+    it("should return a department by ID", function() {
+      return Department.findOne().then(function(res) {
+        let departmentToFind = res._id;
+
+        return chai
+          .request(app)
+          .get(`/list/${departmentToFind}`)
+          .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a("object");
+            expect(res).to.be.json;
+          });
+      });
+    });
 	});
 
   describe('POST endpoint', function() {
@@ -177,5 +191,25 @@ describe('Department List API resource', function() {
         });
     });
   });
+
+  describe("DELETE endpoint", function() {
+    it("delete a department by ID", function() {
+      let department;
+
+      return Department.findOne()
+        .then(function(_department) {
+          department = _department;
+          return chai.request(app).delete(`/delete/${department.id}`);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return Department.findById(department.id);
+        })
+        .then(function(_department) {
+          expect(_department).to.be.null;
+        });
+    });
+  });
+
 	
 });
