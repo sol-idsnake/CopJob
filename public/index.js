@@ -17,16 +17,17 @@ function requestDatabaseItems() {
 }
 
 function renderDatabaseItem(res) {
+  $(".list").empty();
   $(".list").append(`
-		<li class="tab">
-		<span class="name">Name</span>
-		<span class="state">State</span>
-		<span class="age">Age</span>
-		<span class="citizenship">Citizenship?</span>
-		<span class="position">Position</span>
-		<span class="link">Link</span>
-		</li>
-		`);
+    <li class="tab">
+    <span class="name">Name</span>
+    <span class="state">State</span>
+    <span class="age">Age</span>
+    <span class="citizenship">Citizenship?</span>
+    <span class="position">Position</span>
+    <span class="link">Link</span>
+    </li>
+    `);
 
   res.forEach((item, index) => {
     // ternary: if index divisible by 2, set className to gray
@@ -71,12 +72,12 @@ function requestDeleteItem() {
 
 function confirmDeleteItem(itemName, itemId) {
   $(".warningConfirm").append(`
-		<span class="confirmMessage">Remove item: ${itemName}?</span>
-		<div>
+    <span class="confirmMessage">Remove item: ${itemName}?</span>
+    <div>
       <button class="js-delete-confirm" value="js-form">Confirm</button>
       <button class="js-delete-abort">Cancel</button>
     </div>
-		`);
+    `);
 
   $(".warningConfirm").on("click", ".js-delete-confirm", () => {
     $(".warningConfirm").empty();
@@ -117,7 +118,6 @@ function requestUpdateItem() {
       .parent()
       .parent()
       .attr("id");
-      console.log(itemId)
     const query = {
       url: `/list/${itemId}`,
       method: "GET",
@@ -164,7 +164,6 @@ function insertFormData(res) {
     $(".warningConfirm").empty();
     $(".updateWrapper").empty();
     $(".listWrapper").show();
-    reload();
   });
 
   $(".js-form-submit").on("click", event => {
@@ -209,16 +208,14 @@ function requestUpdateDatabase(input, res) {
 function confirmUpdate() {
   $(".warningConfirm")
     .empty()
-    .append(
-      `
-		<span class="success">Updated item #${this.headers.id} in database</span>
-		`
-    )
+    .append(`
+    <span class="success">Updated item #${this.headers.id} in database</span>
+    `)
     .delay(2000)
     .fadeTo(800, 0);
   $(".updateWrapper").hide();
   $(".listWrapper").show();
-  reload();
+  reload()
 }
 
 function requestViewItem() {
