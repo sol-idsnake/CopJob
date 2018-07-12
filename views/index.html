@@ -16,8 +16,11 @@
 <body>
 
   <header>
-    <div class="wrapper">
-      <h1><a href="/">CopJob</a></h1>
+    <div class="navWrapper">
+      <span class="logoWrapper">
+        <img src="logohat.png">
+        <h1><a href="/">Cop<span>Job</span></a></h1>
+      </span>
       <nav>
         <ul>
           <li><a href="/index">Database</a></li>
@@ -29,10 +32,18 @@
 
   <!-- Change views via .list flex-direction as option -->
   <main>
+
     <aside class="warningConfirm"></aside>
+    
+    <section class="topDiv">
+      <input type="text" name="search-keywords" class="search-keywords" id="js-search-keywords" placeholder="Search any position, state, etc.">
+    </section>
+    
     <section class="listWrapper">
       <ul class="list"></ul>
     </section>
+
+
     <section class="updateWrapper">
       <form action="#" class="js-form" id="js-form">
         <fieldset>
