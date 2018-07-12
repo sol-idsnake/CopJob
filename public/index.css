@@ -42,9 +42,19 @@ a {
   text-decoration: none;
 }
 
+a > span {
+  color: #ffbc49;
+}
+
 h1 {
   color: white;
-  margin: 0.3em 0;
+  font-family: 'Kalam', cursive;
+}
+
+img {
+  height: 50px;
+  margin-right: .5em;
+  width: auto;
 }
 
 nav > ul {
@@ -71,10 +81,6 @@ nav > ul > li:hover {
   border-bottom: 3px solid #454cff;
 }
 
-span {
-  /*display: inline-block;*/
-}
-
 span > a {
   color: black;
   text-decoration: underline;
@@ -86,7 +92,7 @@ ul {
 }
 
 i {
-  opacity: .7;
+  opacity: .6;
 }
 
 i:hover {
@@ -144,10 +150,15 @@ textarea {
   width: 50vw;
 }
 
-.wrapper {
+.navWrapper {
   display: flex;
   justify-content: space-around;
   width: 80%;
+}
+
+.logoWrapper {
+  align-items: center;
+  display: flex;
 }
 
 .js-delete-confirm, .js-form-submit {
