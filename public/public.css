@@ -188,16 +188,19 @@ input[type="text"] {
 }
 
 
-/* iPhone 5 Landscape */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
-	img {
-		height: 125px;
-		width: auto;
-	}
 
+
+
+/* iPhone 2G, 3G, 4, 4S Portrait*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
 	input[type="text"] {
 		grid-column: 1/2;
 		grid-row: 1/2;
+	}
+
+	img {
+		height: 100px;
+		width: auto;
 	}
 
 	.welcome {
@@ -209,11 +212,30 @@ input[type="text"] {
 		padding-top: .75em;
 	}
 
+	.welcomeHeaders > h2 {
+		padding-top: 0;
+	}
+
+	.infoText {
+		margin: 1em 0;
+	}
+
 	.topDiv {
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr 1fr;
 		padding: .75em 1em 0 1em;
 		width: 100%;
+	}
+
+	.listItems {
+		width: 90%;
+	}
+
+	.counter {
+		color: white;
+		grid-column: 1/2;
+		grid-row: 2/3;
+		margin: auto;
 	}
 }
 
@@ -265,16 +287,16 @@ input[type="text"] {
 	}
 }
 
-/* iPhone 2G, 3G, 4, 4S Portrait*/
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
+/* iPhone 5 Landscape */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+	img {
+		height: 125px;
+		width: auto;
+	}
+
 	input[type="text"] {
 		grid-column: 1/2;
 		grid-row: 1/2;
-	}
-
-	img {
-		height: 100px;
-		width: auto;
 	}
 
 	.welcome {
@@ -284,14 +306,6 @@ input[type="text"] {
 	.welcomeHeaders {
 		display: block;
 		padding-top: .75em;
-	}
-
-	.welcomeHeaders > h2 {
-		padding-top: 0;
-	}
-
-	.infoText {
-		margin: 1em 0;
 	}
 
 	.topDiv {
@@ -304,12 +318,26 @@ input[type="text"] {
 	.listItems {
 		width: 90%;
 	}
+}
 
-	.counter {
-		color: white;
-		grid-column: 1/2;
-		grid-row: 2/3;
-		margin: auto;
+/* iPhone 6, 6s, 7, 8 */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	.infoText {
+		padding: 0 .5em;
 	}
 }
 
+/* iPhone 6, 6s, 7, 8 landscape*/
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+	.infoText {
+		margin-top: 1em;
+		padding: 0 .5em;
+	}
+}
+
+/* iPhone 6+, 6s+, 7+, 8+ portrait*/
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	.infoText {
+		margin-top: 2em;
+	}
+}

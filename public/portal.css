@@ -196,3 +196,54 @@ span {
   display: flex;
   flex-direction: column;
 }
+
+/* iPhone 2G, 3G, 4, 4S Portrait*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
+  img {
+    display: none;
+  }
+
+  nav > ul > li {
+    margin-right: .5em
+  } 
+
+  form {
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+  }
+
+  textarea {
+    min-width: unset;
+    width: 100%;
+  }
+
+  input[type="text"] {
+    width: 90%;
+  }
+
+  .navWrapper {
+    width: 100%;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .js-form-submit {
+    margin-right: 0;
+  }
+}
+
+/* iPhone 2G, 3G, 4, 4S Landscape */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
+  input[type="text"] {
+    width: 90%;
+  }
+
+  textarea {
+    min-width: unset;
+    width: 100%;
+  }
+}
