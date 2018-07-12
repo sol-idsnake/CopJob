@@ -1,6 +1,6 @@
-$(displaySite);
+$(getStarted);
 
-function displaySite() {
+function getStarted() {
   requestDatabaseItems();
   requestDeleteItem();
   requestUpdateItem();
@@ -8,17 +8,27 @@ function displaySite() {
 }
 
 function requestDatabaseItems() {
-  const query = {
-    url: "/list",
-    method: "GET",
-    success: renderDatabaseItem
-  };
-  $.ajax(query);
-}
+  let list = [],
+    filteredList = [];
 
-function renderDatabaseItem(res) {
-  $(".list").empty();
-  $(".list").append(`
+  $(".search-keywords").keyup(function() {
+    getFilteredItems();
+  });
+
+  requestDatabaseItems();
+  getFilteredItems();
+
+  function requestDatabaseItems() {
+    const query = {
+      url: "/list",
+      method: "GET",
+      success: renderDatabaseItems
+    };
+    $.ajax(query);
+  }
+
+  function renderDatabaseItems(res) {
+    $(".list").append(`
     <li class="tab">
     <span class="name">Name</span>
     <span class="state">State</span>
@@ -29,15 +39,20 @@ function renderDatabaseItem(res) {
     </li>
     `);
 
-  res.forEach((item, index) => {
-    // ternary: if index divisible by 2, set className to gray
+    res.forEach((item, index) => {
+      generateListItem(item, index);
+      list.push(item);
+    });
+  }
+
+  function generateListItem(item, index) {
     const className = index % 2 == 0 ? "gray" : "";
 
     // shorten url
     let string = `${item.link}`;
     let sliced = string.substring(0, 22);
 
-    $(".list").append(
+    return $(".list").append(
       `<li class="${className}" id="${item.id}">
       <span class="name">${item.name}</span>
       <span class="state">${item.state}</span>
@@ -54,7 +69,35 @@ function renderDatabaseItem(res) {
       </span>
       </li>`
     );
-  });
+  }
+
+  function getFilteredItems() {
+    filteredList = list.filter(textMatch);
+    generateList();
+  }
+
+  function generateList() {
+    $(".list").empty();
+
+    filteredList.forEach((item, index) => {
+      generateListItem(item, index);
+    });
+  }
+
+  function textMatch(item) {
+    let searchTerm = $(".search-keywords")
+      .val()
+      .toLowerCase();
+    itemText = (
+      item.name +
+      item.state +
+      item.requirements.age +
+      item.requirements.citizenship +
+      item.position +
+      item.link
+    ).toLowerCase();
+    return itemText.indexOf(searchTerm) !== -1;
+  }
 }
 
 function requestDeleteItem() {
@@ -111,8 +154,11 @@ function confirmDeleteMessage(itemId) {
 
 function requestUpdateItem() {
   $(".list").on("click", ".fa-pencil-alt", event => {
+  	$(".topDiv").hide();
     $(".listWrapper").hide();
     $(".updateWrapper").show();
+    $(".js-form-submit").show();
+    $(".js-form-reset").show();
 
     const itemId = $(event.currentTarget)
       .parent()
@@ -164,6 +210,7 @@ function insertFormData(res) {
     $(".warningConfirm").empty();
     $(".updateWrapper").empty();
     $(".listWrapper").show();
+    $(".topDiv").show();
   });
 
   $(".js-form-submit").on("click", event => {
@@ -221,6 +268,7 @@ function confirmUpdate() {
 function requestViewItem() {
   $(".list").on("click", ".fa-eye", event => {
     event.preventDefault();
+    $('.topDiv').hide();
     $(".listWrapper").hide();
     $(".updateWrapper").show();
     $(".warningConfirm").append("<span>View only</span>");
@@ -253,9 +301,4 @@ function requestViewItem() {
     };
     $.ajax(query);
   });
-}
-
-function reload() {
-  $(".list").empty();
-  requestDatabaseItems();
 }

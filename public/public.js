@@ -48,7 +48,7 @@ function showAllJobs() {
 	      msg = "Showing 1 item";
 	      break;
 	    case matches <= maxDisplayLimit:
-	      msg = "Showing " + filteredList.length + " items";
+	      msg = "Showing " + filteredList.length + " out of " + list.length + " items";
 	      break;
 	    default:
 	      msg = "Showing " + maxDisplayLimit + " of " + matches + " items";
@@ -100,9 +100,8 @@ function showAllJobs() {
 }
 
 function navigateWindows() {
-	$('.allSpan').on('click', function() {
+	$('.opportunities').on('click', function() {
 		$('.welcome').hide()
-		$('.jobSelector').hide()
 		$('.allJobsSection').css('display', 'flex')
 		$('.topDiv').css('display', 'grid')
 	})
