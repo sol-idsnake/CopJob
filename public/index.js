@@ -3,22 +3,25 @@ $(getStarted);
 function getStarted() {
   requestDatabaseItems();
   requestDeleteItem();
-  requestUpdateItem();
+  requestEditItem();
   requestViewItem();
 }
 
+function reload() {
+  location.reload();
+}
+
 function requestDatabaseItems() {
-  let list = [],
-    filteredList = [];
+  let list = [];
+  let filteredList = [];
 
   $(".search-keywords").keyup(function() {
     getFilteredItems();
   });
 
-  requestDatabaseItems();
-  getFilteredItems();
+  getRequest();
 
-  function requestDatabaseItems() {
+  function getRequest() {
     const query = {
       url: "/list",
       method: "GET",
@@ -73,10 +76,10 @@ function requestDatabaseItems() {
 
   function getFilteredItems() {
     filteredList = list.filter(textMatch);
-    generateList();
+    generateFilteredList();
   }
 
-  function generateList() {
+  function generateFilteredList() {
     $(".list").empty();
 
     filteredList.forEach((item, index) => {
@@ -101,26 +104,28 @@ function requestDatabaseItems() {
 }
 
 function requestDeleteItem() {
+  let itemId = "";
+  let itemName = "";
+
   $(".list").on("click", ".fa-trash-alt", event => {
-    const itemId = $(event.currentTarget)
+    itemId = $(event.target)
+      .parent()
       .parent()
       .attr("id");
-    const itemName = $(event.currentTarget)
+    itemName = $(event.target)
+      .parent()
       .siblings("span.name")
       .text();
 
-    confirmDeleteItem(itemName, itemId);
-  });
-}
-
-function confirmDeleteItem(itemName, itemId) {
-  $(".warningConfirm").append(`
+    $(".warningConfirm").empty();
+    $(".warningConfirm").append(`
     <span class="confirmMessage">Remove item: ${itemName}?</span>
     <div>
-      <button class="js-delete-confirm" value="js-form">Confirm</button>
-      <button class="js-delete-abort">Cancel</button>
+    <button class="js-delete-confirm" value="js-form">Confirm</button>
+    <button class="js-delete-abort">Cancel</button>
     </div>
     `);
+  });
 
   $(".warningConfirm").on("click", ".js-delete-confirm", () => {
     $(".warningConfirm").empty();
@@ -133,37 +138,46 @@ function confirmDeleteItem(itemName, itemId) {
       success: confirmDeleteMessage
     };
     $.ajax(query);
-    reload();
   });
 
   $(".warningConfirm").on("click", ".js-delete-abort", () => {
-    $(".warningConfirm").empty();
+    reload();
   });
-}
 
-function confirmDeleteMessage(itemId) {
-  $(".warningConfirm")
-    .append(
+  function confirmDeleteMessage(itemId) {
+    $(".list").empty();
+    requestDatabaseItems();
+
+    $(".warningConfirm").append(
       `<span class="success">Successfully deleted item ID ${
         this.headers.id
       }</span>`
-    )
-    .delay(2000)
-    .fadeTo(800, 0);
+    );
+
+    $(".success")
+      .delay(2000)
+      .fadeTo(800, 0, () => {
+        $(".warningConfirm").empty();
+      });
+  }
 }
 
-function requestUpdateItem() {
+function requestEditItem() {
+  let itemId = "";
+
   $(".list").on("click", ".fa-pencil-alt", event => {
-  	$(".topDiv").hide();
+    $(".warningConfirm").empty();
+    $(".topDiv").hide();
     $(".listWrapper").hide();
     $(".updateWrapper").show();
     $(".js-form-submit").show();
     $(".js-form-reset").show();
 
-    const itemId = $(event.currentTarget)
+    itemId = $(event.target)
       .parent()
       .parent()
       .attr("id");
+
     const query = {
       url: `/list/${itemId}`,
       method: "GET",
@@ -171,10 +185,133 @@ function requestUpdateItem() {
     };
     $.ajax(query);
   });
+
+  $(".js-form-submit").on("click", event => {
+    event.preventDefault();
+    // fetchInput & validateInput get shared by index & portal from validateInput.js
+    let input = fetchInput();
+    let validated = validateInput(input);
+
+    if (validated) {
+      requestUpdateDatabase(input, itemId);
+    }
+  });
+
+  $(".js-form-reset").on("click", event => {
+    $(".topDiv").show();
+    $(".listWrapper").show();
+    $(".updateWrapper").hide();
+    $(".js-form-submit").hide();
+    $(".js-form-reset").hide();
+    $(".list").empty();
+    $(".warningConfirm").empty();
+    requestDatabaseItems();
+  });
+
+  function requestUpdateDatabase(input, itemId) {
+    const query = {
+      url: `/update/${itemId}`,
+      method: "PUT",
+      contentType: "application/json",
+      headers: {
+        id: itemId
+      },
+      data: JSON.stringify({
+        id: itemId,
+        position: input.position,
+        name: input.name,
+        link: input.link,
+        state: input.state,
+        requirements: {
+          age: input.requirements.age,
+          citizenship: input.requirements.citizenship,
+          degree: input.requirements.degree
+        },
+        salary: input.salary,
+        description: input.description
+      }),
+      success: confirmUpdate
+    };
+    $.ajax(query);
+  }
+
+  function confirmUpdate() {
+    $(".updateWrapper").hide();
+    $(".topDiv").show();
+    $(".listWrapper").show();
+    $(".warningConfirm").empty().append(`
+	    <span class="success">Updated item #${this.headers.id} in database</span>
+	    `);
+    $(".success")
+      .delay(2000)
+      .fadeTo(800, 0, () => {
+        $(".warningConfirm").empty();
+      });
+    $('.list').empty()
+    requestDatabaseItems()
+  }
+}
+
+function requestViewItem() {
+  let itemId = "";
+
+  $(".list").on("click", ".fa-eye", event => {
+    $(".topDiv").hide();
+    $(".listWrapper").hide();
+    $(".js-form-submit").hide();
+    $(".js-form-reset").hide();
+    $(".updateWrapper").show();
+
+    $(".warningConfirm")
+      .append(
+        `
+    	<i class="far fa-arrow-alt-circle-left fa-2x"></i>
+    	`
+      )
+      .css("flex-direction", "row");
+
+    itemId = $(event.target)
+      .parent()
+      .parent()
+      .attr("id");
+
+    $("#position").prop("readonly", true);
+    $("#name").prop("readonly", true);
+    $("#link").prop("readonly", true);
+    $("#state").prop("readonly", true);
+    $("#age").prop("readonly", true);
+    $("#salary").prop("readonly", true);
+    $("#description").prop("readonly", true);
+    $("#citizen-yes").prop("disabled", true);
+    $("#citizen-no").prop("disabled", true);
+    $("#highschool").prop("disabled", true);
+    $("#associate").prop("disabled", true);
+    $("#bachelor").prop("disabled", true);
+    $("#masters").prop("disabled", true);
+    $("#doctorate").prop("disabled", true);
+
+    const query = {
+      url: `/list/${itemId}`,
+      method: "GET",
+      success: insertFormData
+    };
+    $.ajax(query);
+  });
+
+  $(".warningConfirm").on("click", ".fa-arrow-alt-circle-left", event => {
+    $(".updateWrapper").hide();
+    $(".topDiv").show();
+    $(".listWrapper").show();
+
+    $(".warningConfirm")
+      .empty()
+      .css("flex-direction", "column");
+  });
 }
 
 function insertFormData(res) {
-  $(".warningConfirm").append(`<span>Reviewing Item ID: ${res.id}</span>`);
+  $(".warningConfirm").append(`<span>Viewing Item ID: ${res.id}</span>`);
+
   $("#position").val(`${res.position}`);
   $("#name").val(`${res.name}`);
   $("#link").val(`${res.link}`);
@@ -183,7 +320,7 @@ function insertFormData(res) {
   $("#salary").val(`${res.salary}`);
   $("#description").val(`${res.description}`);
 
-  // pre-set citizenship radtio button
+  // pre-set citizenship radio button
   if (res.requirements.citizenship === "yes") {
     $("#citizen-yes").prop("checked", true);
   } else {
@@ -204,101 +341,4 @@ function insertFormData(res) {
   } else if (res.requirements.degree === "PhD required") {
     $("#doctorate").prop("checked", true);
   }
-
-  $(".js-form-reset").on("click", event => {
-    event.preventDefault();
-    $(".warningConfirm").empty();
-    $(".updateWrapper").empty();
-    $(".listWrapper").show();
-    $(".topDiv").show();
-  });
-
-  $(".js-form-submit").on("click", event => {
-    event.preventDefault();
-
-    // fetchInput & validateInput get shared by index & portal from validateInput.js
-    let input = fetchInput();
-    let validated = validateInput(input);
-    if (validated) {
-      requestUpdateDatabase(input, res);
-    }
-  });
-}
-
-function requestUpdateDatabase(input, res) {
-  const query = {
-    url: `/update/${res.id}`,
-    method: "PUT",
-    contentType: "application/json",
-    headers: {
-      id: `${res.id}`
-    },
-    data: JSON.stringify({
-      id: `${res.id}`,
-      position: input.position,
-      name: input.name,
-      link: input.link,
-      state: input.state,
-      requirements: {
-        age: input.requirements.age,
-        citizenship: input.requirements.citizenship,
-        degree: input.requirements.degree
-      },
-      salary: input.salary,
-      description: input.description
-    }),
-    success: confirmUpdate
-  };
-  $.ajax(query);
-}
-
-function confirmUpdate() {
-  $(".warningConfirm")
-    .empty()
-    .append(`
-    <span class="success">Updated item #${this.headers.id} in database</span>
-    `)
-    .delay(2000)
-    .fadeTo(800, 0);
-  $(".updateWrapper").hide();
-  $(".listWrapper").show();
-  reload()
-}
-
-function requestViewItem() {
-  $(".list").on("click", ".fa-eye", event => {
-    event.preventDefault();
-    $('.topDiv').hide();
-    $(".listWrapper").hide();
-    $(".updateWrapper").show();
-    $(".warningConfirm").append("<span>View only</span>");
-    $(".js-form-submit").hide();
-    $(".js-form-reset").hide();
-
-    $("#position").prop("readonly", true);
-    $("#name").prop("readonly", true);
-    $("#link").prop("readonly", true);
-    $("#state").prop("readonly", true);
-    $("#age").prop("readonly", true);
-    $("#salary").prop("readonly", true);
-    $("#description").prop("readonly", true);
-    $("#citizen-yes").prop("disabled", true);
-    $("#citizen-no").prop("disabled", true);
-    $("#highschool").prop("disabled", true);
-    $("#associate").prop("disabled", true);
-    $("#bachelor").prop("disabled", true);
-    $("#masters").prop("disabled", true);
-    $("#doctorate").prop("disabled", true);
-
-    const itemId = $(event.currentTarget)
-      .parent()
-      .parent()
-      .attr("id");
-    const query = {
-      url: `/list/${itemId}`,
-      method: "GET",
-      success: insertFormData
-    };
-    $.ajax(query);
-  });
 }
