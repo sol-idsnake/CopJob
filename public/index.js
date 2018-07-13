@@ -173,6 +173,14 @@ function requestEditItem() {
     $(".js-form-submit").show();
     $(".js-form-reset").show();
 
+    $(".warningConfirm")
+      .append(
+        `
+      <i class="far fa-arrow-alt-circle-left fa-2x"></i>
+      `
+      )
+      .css("flex-direction", "row");
+
     itemId = $(event.target)
       .parent()
       .parent()
@@ -236,19 +244,16 @@ function requestEditItem() {
   }
 
   function confirmUpdate() {
-    $(".updateWrapper").hide();
-    $(".topDiv").show();
-    $(".listWrapper").show();
-    $(".warningConfirm").empty().append(`
-	    <span class="success">Updated item #${this.headers.id} in database</span>
-	    `);
-    $(".success")
+    $(".viewing")
+      .text(`Updated item #${this.headers.id} in database`)
+      .css("color", "green")
       .delay(2000)
       .fadeTo(800, 0, () => {
-        $(".warningConfirm").empty();
+        $(".viewing")
+          .text(`Viewing Item ID: ${this.headers.id}`)
+          .css("color", "black")
+          .css("opacity", "1");
       });
-    $('.list').empty()
-    requestDatabaseItems()
   }
 }
 
@@ -306,11 +311,14 @@ function requestViewItem() {
     $(".warningConfirm")
       .empty()
       .css("flex-direction", "column");
+
+    $('.list').empty()
+    requestDatabaseItems()
   });
 }
 
 function insertFormData(res) {
-  $(".warningConfirm").append(`<span>Viewing Item ID: ${res.id}</span>`);
+  $(".warningConfirm").append(`<span class="viewing">Viewing Item ID: ${res.id}</span>`);
 
   $("#position").val(`${res.position}`);
   $("#name").val(`${res.name}`);
