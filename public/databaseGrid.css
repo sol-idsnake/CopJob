@@ -25,6 +25,7 @@
 
 .age {
   grid-column: 3/4;
+  text-align: center;
 }
 
 .citizenship {
