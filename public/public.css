@@ -163,12 +163,13 @@ input[type="text"] {
 }
 
 .link {
-	grid-column: 1/4;
+	grid-column: 1/6;
 	grid-row: 3/4;
 }
 
 .link > a {
-		margin-left: .5em;
+	margin-left: .5em;
+	word-break: break-all;
 }
 
 .salary {
@@ -189,7 +190,12 @@ input[type="text"] {
 
 
 
-
+/* iPhone 6+, 6s+, 7+, 8+ portrait*/
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+	.infoText {
+		margin-top: 2em;
+	}
+}
 
 /* iPhone 2G, 3G, 4, 4S Portrait*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
@@ -333,11 +339,10 @@ input[type="text"] {
 		margin-top: 1em;
 		padding: 0 .5em;
 	}
-}
 
-/* iPhone 6+, 6s+, 7+, 8+ portrait*/
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-	.infoText {
-		margin-top: 2em;
+	.topDiv {
+		width: 90%;
 	}
 }
+
+

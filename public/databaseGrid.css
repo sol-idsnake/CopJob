@@ -76,6 +76,10 @@
     border-bottom: 1px solid gray;
   }
 
+  .list > li.tab {
+    display: none;
+  }
+
   .name {
     grid-column: 1/3;
     grid-row: 1/2;
