@@ -48,12 +48,12 @@ a > span {
 
 h1 {
   color: white;
-  font-family: 'Kalam', cursive;
+  font-family: "Kalam", cursive;
 }
 
 img {
   height: 50px;
-  margin-right: .5em;
+  margin-right: 0.5em;
   width: auto;
 }
 
@@ -92,7 +92,7 @@ ul {
 }
 
 i {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 i:hover {
@@ -132,7 +132,7 @@ input[type="text"] {
 
 input[type="text"].search-keywords {
   margin-bottom: 1em;
-  padding: .5em;
+  padding: 0.5em;
   width: 50%;
 }
 
@@ -142,7 +142,7 @@ input[type="number"] {
 
 textarea {
   height: 100px;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   max-width: 600px;
   min-width: 350px;
   width: 50vw;
@@ -171,7 +171,8 @@ textarea {
   width: 8em;
 }
 
-.js-delete-confirm, .js-form-submit {
+.js-delete-confirm,
+.js-form-submit {
   background: #007bff;
   border-radius: 0.25rem;
   border: 1px solid transparent;
@@ -183,7 +184,8 @@ textarea {
   width: 8em;
 }
 
-.js-delete-abort, .js-form-reset {
+.js-delete-abort,
+.js-form-reset {
   background-color: #dc3545;
   border-radius: 0.25rem;
   border: 1px solid transparent;
@@ -259,18 +261,18 @@ textarea {
 }
 
 /* iPhone 2G, 3G, 4, 4S Portrait*/
-@media only screen and (min-device-width : 320px) and (max-device-height : 480px) and (orientation : portrait) {
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (orientation: portrait) {
   img {
     display: none;
   }
 
   nav > ul > li {
-    margin-right: .5em
+    margin-right: 0.5em;
   }
 
   aside > span {
     text-align: center;
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   form {
@@ -287,7 +289,7 @@ textarea {
   input[type="text"].search-keywords {
     width: 90%;
   }
-  
+
   .search-keywords {
     margin: 1em;
     width: 90%;
@@ -312,18 +314,18 @@ textarea {
 }
 
 /* iPhone 2G, 3G, 4, 4S Landscape */
-@media only screen and (min-device-width : 320px) and (max-device-height : 480px) and (orientation : landscape) {
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (orientation: landscape) {
   img {
     display: none;
   }
 
   nav > ul > li {
-    margin-right: .5em
+    margin-right: 0.5em;
   }
 
   aside > span {
     text-align: center;
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   input[type="text"].search-keywords {
@@ -365,13 +367,13 @@ textarea {
 }
 
 /* iPhone 5, 5SE Portrait */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
   img {
     display: none;
   }
 
   nav > ul > li {
-    margin-right: .5em
+    margin-right: 0.5em;
   }
 
   .warningConfirm {
@@ -393,7 +395,7 @@ textarea {
 }
 
 /* iPhone 5 Landscape */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
   form {
     width: 100%;
     max-width: unset;
@@ -415,14 +417,14 @@ textarea {
 }
 
 /* iPhone 6, 6s, 7, 8 */
-@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
   .warningConfirm {
     height: auto;
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   nav > ul > li {
-    margin-right: .5em
+    margin-right: 0.5em;
   }
 
   form {
@@ -431,7 +433,7 @@ textarea {
     min-width: unset;
   }
 
-  input[type="text"] {
+  input[type="text"].search-keywords {
     width: 90%;
   }
 
@@ -450,11 +452,11 @@ textarea {
 }
 
 /* iPhone 6, 6s, 7, 8 */
-@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
 }
 
 /* iPhone 6+, 6s+, 7+, 8+ portrait*/
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
   form {
     width: 100%;
     max-width: unset;
@@ -489,7 +491,7 @@ textarea {
   }
 
   .topDiv {
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   .list {
@@ -498,7 +500,7 @@ textarea {
 }
 
 /* iPhone 6+, 6s+, 7+, 8+ portrait*/
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
   form {
     width: 100%;
     max-width: unset;
@@ -523,7 +525,7 @@ textarea {
   input[type="number"] {
     width: 90%;
   }
-  
+
   .navWrapper {
     width: 100%;
   }
@@ -533,7 +535,7 @@ textarea {
   }
 
   .topDiv {
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   .list {
