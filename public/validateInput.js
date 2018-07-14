@@ -5,15 +5,19 @@ function fetchInput() {
   const name = $("#name").val();
   const link = $("#link").val();
   const state = $("#state").val();
-  const age = parseInt($("#age").val(), 10);
+  const age = $("#age").val();
 
-  let citizenship = "yes";
+  let citizenship = "";
   if ($("#citizen-no").is(":checked")) {
     citizenship = "no";
+  } else if ($("#citizen-yes").is(":checked")) {
+    citizenship = "yes";
   }
 
-  let degree = "High School degree required";
-  if ($("#associate").is(":checked")) {
+  let degree = "";
+  if ($("#highschool").is(":checked")) {
+    degree = "High School degree required";
+  } else if ($("#associate").is(":checked")) {
     degree = "Associate's degree required (2-years)";
   } else if ($("#bachelor").is(":checked")) {
     degree = "Bachelor degree required (4-years)";
@@ -43,65 +47,36 @@ function fetchInput() {
 }
 
 function validateInput(departmentObject) {
-  console.log("Validating Input");
-  let isValid = true;
-  let missingBoxes = [];
-  const array = Object.keys(departmentObject);
-
-  // add missing elements to missingBoxes and show a red border on missing input boxes
-  for (let i = 0; i < array.length; i++) {
-    keyname = array[i];
-    if (departmentObject[keyname] !== "") {
-      $(`#${keyname}`).removeClass("warningBox");
-      isValid = true;
-    } else {
-      missingBoxes.push(keyname);
-      $(`#${keyname}`).addClass("warningBox");
-      isValid = false;
-    }
-  }
-
-  // edge case => show warning on citizenship radio buttons if both left unchecked
-  // Need the edge case because radio buttons can't be evaluated on empty values. If '' doesn't work.
-  if ($("#citizen-yes").is(":checked") || $("#citizen-no").is(":checked")) {
-    $(".citizen").removeClass("warningBox");
-    isValid = true;
-  } else if (
-    !($("#citizen-yes").is(":checked") && $("#citizen-no").is(":checked"))
-  ) {
-    $(".citizen").addClass("warningBox");
-    missingBoxes.push("citizenship");
-    isValid = false;
-  }
-
-  // edge case => show warning on degree radio buttons if all left unchecked
-  // Need the edge case because radio buttons can't be evaluated on empty values. If '' doesn't work.
-  if (
-    $("#highschool").is(":checked") ||
-    $("#associate").is(":checked") ||
-    $("#bachelor").is(":checked") ||
-    $("#masters").is(":checked") ||
-    $("#doctorate").is(":checked")
-  ) {
-    $(".degree").removeClass("warningBox");
-    isValid = true;
-  } else {
-    $(".degree").addClass("warningBox");
-    missingBoxes.push("degree");
-    isValid = false;
-  }
-
-  // remove all warning spans each validation function runs.
   $(".warningDiv").empty();
-  // If items in missingBoxes are found in the departmentObject, show warning span
-  for (let i = 0; i < missingBoxes.length; i++) {
-    if (missingBoxes[i] in departmentObject) {
-      $(".warningDiv").append(
-        `<span>* ${missingBoxes[i]} field missing</span>`
-      );
+  let isValid = false;
+  let missingBoxes = [];
+
+  departmentObjectCheck(departmentObject);
+  // recursive function to iterate over all items and sub-items in departmentObject; checks if any input is empty
+  function departmentObjectCheck(departmentObject) {
+    let keys = Object.keys(departmentObject);
+    for (let i = 0; i < keys.length; i++) {
+      if (departmentObject[keys[i]] !== "") {
+        // If object in departmentObject is another object, call departmentObjectCheck recursively
+        if (departmentObject[keys[i]].constructor === {}.constructor) {
+          departmentObjectCheck(departmentObject[keys[i]]);
+        }
+
+        $(`#${keys[i]}`).removeClass("warningBox");
+        isValid = true;
+      } else {
+        missingBoxes.push(keys[i]);
+        $(`#${keys[i]}`).addClass("warningBox");
+        isValid = false;
+      }
     }
   }
 
+  missingBoxes.forEach(item => {
+    $(".warningDiv").append(`<span>* ${item} field missing</span>`);
+  });
+
+  let isValidState = false;
   let states = [
     "ak",
     "al",
@@ -204,36 +179,38 @@ function validateInput(departmentObject) {
     "wisconsin",
     "wyoming"
   ];
-
-  let isValidState = false
   // check if user's state input equal state abbreviation in 'states' array
   // set 'isValidState' to true if it does
   for (let i = 0; i < states.length; i++) {
-  	if ($("#state").val().toLowerCase() == states[i]) {
-  		isValidState = true
-  	}
-  }
-  
-  // If user input for state does not match state abbreviation from dropwdown, throw error
-  if (!isValidState) {
-  	$(".warningDiv").append(
-        `<span class='state-warning'>* Please select a valid state from the dropdown</span>`
-      );
-    return;
-  } else {
-  	$('.warningDiv').find('.state-warning').remove();
+    if (
+      $("#state")
+        .val()
+        .toLowerCase() == states[i]
+    ) {
+      isValidState = true;
+      isValid = true;
+    }
   }
 
-  // Have to add a last check to confirm that all conditions are met before setting 'isValid' to true
-  // This way we ensure that inputs have values AND are selected.
-  if (
-    !$(".citizen").hasClass("warningBox") &&
-    !$(".degree").hasClass("warningBox") &&
-    missingBoxes.length === 0
-  ) {
-    isValid = true;
-  } else {
+  // If user input for state does not match state abbreviation from dropwdown, throw error
+  if (!isValidState) {
+    $(".warningDiv").append(
+      `<span class='state-warning'>check state field for error</span>`
+    );
     isValid = false;
+    return;
+  } else {
+    isValid = true;
+    $(".warningDiv")
+      .find(".state-warning")
+      .remove();
   }
-  return isValid;
+
+  if (
+    missingBoxes.length == 0 &&
+    isValidState &&
+    $(".warningDiv").html() === ""
+  ) {
+    return isValid;
+  }
 }
