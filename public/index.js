@@ -200,7 +200,7 @@ function requestEditItem() {
     $(".js-form-submit").hide();
     $(".js-form-reset").hide();
     $(".updateWrapper").show();
-    $('.js-form-edit').show();
+    $(".js-form-edit").show();
 
     $(".warningConfirm")
       .append(
@@ -238,7 +238,7 @@ function requestEditItem() {
     $.ajax(query);
   });
 
-  $('.js-form-edit').on('click', event => {
+  $(".js-form-edit").on("click", event => {
     event.preventDefault();
     $("#position").prop("readonly", false);
     $("#name").prop("readonly", false);
@@ -255,9 +255,11 @@ function requestEditItem() {
     $("#masters").prop("disabled", false);
     $("#doctorate").prop("disabled", false);
 
-    $('.js-form-edit').hide();
+    $(".js-form-edit").hide();
     $(".js-form-submit").show();
-    $(".js-form-reset").show().html('Abort');
+    $(".js-form-reset")
+      .show()
+      .html("Abort");
   });
 
   $(".js-form-submit").on("click", event => {
@@ -272,6 +274,7 @@ function requestEditItem() {
   });
 
   $(".js-form-reset").on("click", event => {
+    event.preventDefault();
     $(".topDiv").show();
     $(".listWrapper").show();
     $(".updateWrapper").hide();
@@ -326,10 +329,9 @@ function requestEditItem() {
 function requestViewItem() {
   let itemId = "";
 
-  
-
   $(".warningConfirm").on("click", ".fa-arrow-alt-circle-left", event => {
     $(".updateWrapper").hide();
+    $(".js-form-edit").hide();
     $(".topDiv").show();
     $(".listWrapper").show();
 
@@ -337,13 +339,15 @@ function requestViewItem() {
       .empty()
       .css("flex-direction", "column");
 
-    $('.list').empty()
-    requestDatabaseItems()
+    $(".list").empty();
+    requestDatabaseItems();
   });
 }
 
 function insertFormData(res) {
-  $(".warningConfirm").append(`<span class="viewing">Viewing Item ID: ${res.id}</span>`);
+  $(".warningConfirm").append(
+    `<span class="viewing">Viewing Item ID: ${res.id}</span>`
+  );
 
   $("#position").val(`${res.position}`);
   $("#name").val(`${res.name}`);

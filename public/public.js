@@ -1,7 +1,7 @@
 $(getStarted);
 
 function getStarted() {
-	navigateWindows();
+  navigateWindows();
   showAllJobs();
 }
 
@@ -12,7 +12,7 @@ function showAllJobs() {
 
   $(".search-keywords").keyup(function() {
     getFilteredItems();
-	  generateCountMessage();
+    generateCountMessage();
   });
 
   requestDatabaseItems();
@@ -29,32 +29,37 @@ function showAllJobs() {
 
   function renderDatabaseItems(res) {
     res.forEach(item => {
-    	generateListItem(item)
+      generateListItem(item);
       list.push(item);
     });
-    $('.counter').append(`
-  		Showing ${res.length} out of ${res.length} items
-  		`)
+    $(".counter").append(`
+      Showing ${res.length} out of ${res.length} items
+      `);
   }
 
-	function generateCountMessage() {
-	  var msg = "";
-	  let matches = filteredList.length;
-	  switch (true) {
-	    case matches === 0:
-	      msg = "No matches found";
-	      break;
-	    case matches === 1:
-	      msg = "Showing 1 item";
-	      break;
-	    case matches <= maxDisplayLimit:
-	      msg = "Showing " + filteredList.length + " out of " + list.length + " items";
-	      break;
-	    default:
-	      msg = "Showing " + maxDisplayLimit + " of " + matches + " items";
-	  }
-	  $('.counter').text(msg);
-	}
+  function generateCountMessage() {
+    var msg = "";
+    let matches = filteredList.length;
+    switch (true) {
+      case matches === 0:
+        msg = "No matches found";
+        break;
+      case matches === 1:
+        msg = "Showing 1 item";
+        break;
+      case matches <= maxDisplayLimit:
+        msg =
+          "Showing " +
+          filteredList.length +
+          " out of " +
+          list.length +
+          " items";
+        break;
+      default:
+        msg = "Showing " + maxDisplayLimit + " of " + matches + " items";
+    }
+    $(".counter").text(msg);
+  }
 
   function getFilteredItems() {
     filteredList = list.filter(textMatch);
@@ -86,23 +91,23 @@ function showAllJobs() {
 
   function generateListItem(item) {
     return $(".listItems").append(`
-  		<li class="listItem">
-				<span class="name">${item.name}</span>
-				<span class="position">Position: ${item.position}</span>
-				<span class="state">State: ${item.state}</span>
-				<span class="salary">Salary: $${item.salary}</span>
-				<span class="link">Link: <a href="${item.link}">${item.link}</a></span>
-				<span class="description">Job description:</span>
-				<span class="descriptionText"> ${item.description}</span>
-			</li>
-  		`);
+      <li class="listItem">
+        <span class="name">${item.name}</span>
+        <span class="position">Position: ${item.position}</span>
+        <span class="state">State: ${item.state}</span>
+        <span class="salary">Salary: $${item.salary}</span>
+        <span class="link">Link: <a href="${item.link}">${item.link}</a></span>
+        <span class="description">Job description:</span>
+        <span class="descriptionText"> ${item.description}</span>
+      </li>
+      `);
   }
 }
 
 function navigateWindows() {
-	$('.opportunities').on('click', function() {
-		$('.welcome').hide()
-		$('.allJobsSection').css('display', 'flex')
-		$('.topDiv').css('display', 'grid')
-	})
+  $(".opportunities").on("click", function() {
+    $(".welcome").hide();
+    $(".allJobsSection").css("display", "flex");
+    $(".topDiv").css("display", "grid");
+  });
 }
