@@ -41,11 +41,6 @@
   overflow: hidden;
 }
 
-/*.link:after {
-  content: "";
-  grid-column: 7/8;
-}*/
-
 .actions {
   justify-self: end;
   grid-column: 7/8;
