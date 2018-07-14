@@ -159,6 +159,18 @@ textarea {
   display: flex;
 }
 
+.js-form-edit {
+  background: #28a745;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  color: white;
+  display: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  width: 8em;
+}
+
 .js-delete-confirm, .js-form-submit {
   background: #007bff;
   border-radius: 0.25rem;
