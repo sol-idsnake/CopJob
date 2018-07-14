@@ -44,7 +44,7 @@
         <label for='link'>Website</label>
         <input id='link' type='text' name='website' placeholder=''>
 
-        <label for='state'>In which state is the department? (abbreviation)</label>
+        <label for='state'>In which state is the department?</label>
         <input id='state' type='text' name='state' list='states'>
         <datalist id="states">
 					<option value="AK">
@@ -103,7 +103,7 @@
         <input id='age' type='number' name='age' placeholder='e.g. 18, 21'>
 
         <label>Required citizenship?</label>
-        <div class="citizen">
+        <div class="citizenship" id="citizenship">
           <input id='citizen-yes' type='radio' name='citizenship' class="citizen-checkbox-yes">
           <label for="citizen-yes">Yes</label>
           <input id='citizen-no' type='radio' name='citizenship' class="citizen-checkbox-no">
@@ -111,7 +111,7 @@
         </div>
 
         <label>Required degree:</label>
-        <div class="degree">
+        <div class="degree" id="degree">
           <input id='highschool' type="radio" name="degree">
           <label for="highschool">High School</label>
           <input id="associate" type="radio" name="degree">

@@ -55,16 +55,16 @@
 
           <!-- must use ID in 'for' for label association to work. -->
           <label for='position'>What position is being sought?</label>
-          <input id="position" type="text" name="position" placeholder="e.g. Officer, Sergeant...">
+          <input id="position" type="text" name="position" placeholder="e.g. Officer, Sergeant..." maxlength="30">
 
           <label for='name'>Department name</label>
-          <input id="name" type='text' name='name' placeholder='New York City Police Department'>
+          <input id="name" type='text' name='name' placeholder='New York City Police Department' maxlength="50">
 
           <label for='link'>Website</label>
-          <input id='link' type='text' name='website' placeholder=''>
+          <input id='link' type='text' name='website' placeholder='' maxlength="100">
 
           <label for='state'>In which state is the department? (abbreviation)</label>
-          <input id='state' type='text' name='state' list='states'>
+          <input id='state' type='text' name='state' list='states' maxlength="14">
           <datalist id="states">
             <option value="AK">
             <option value="AL">
@@ -119,7 +119,7 @@
           </datalist>
 
           <label for='age'>Minimum required age</label>
-          <input id='age' type='number' name='age' placeholder='e.g. 18, 21'>
+          <input id='age' type='text' name='age' placeholder='e.g. 18, 21' maxlength="2">
 
           <label>Required citizenship?</label>
           <div class="citizen">
@@ -152,7 +152,8 @@
           <textarea id="description" form="js-form"></textarea>
 
           <div class="controls">
-            <button class="js-form-submit" value="js-form">Submit</button>
+            <button class="js-form-submit" value="js-form">Save</button>
+            <button class="js-form-edit">Edit</button>
             <button class="js-form-reset">Reset</button>
           </div>
           <div class="success"></div>
