@@ -1,7 +1,7 @@
 $(formSubmitListener);
 
 function formSubmitListener() {
-  $(".js-form").submit(event => {
+  $(".js-form-submit").on("click", event => {
     event.preventDefault();
 
     let input = fetchInput();
@@ -13,6 +13,11 @@ function formSubmitListener() {
     } else {
       console.log("Input can't be validated");
     }
+  });
+
+  $(".js-form-reset").on("click", event => {
+    event.preventDefault();
+    resetForm();
   });
 }
 

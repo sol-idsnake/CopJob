@@ -194,6 +194,72 @@ function requestEditItem() {
     $.ajax(query);
   });
 
+  $(".list").on("click", ".fa-eye", event => {
+    $(".topDiv").hide();
+    $(".listWrapper").hide();
+    $(".js-form-submit").hide();
+    $(".js-form-reset").hide();
+    $(".updateWrapper").show();
+    $('.js-form-edit').show();
+
+    $(".warningConfirm")
+      .append(
+        `
+      <i class="far fa-arrow-alt-circle-left fa-2x"></i>
+      `
+      )
+      .css("flex-direction", "row");
+
+    itemId = $(event.target)
+      .parent()
+      .parent()
+      .attr("id");
+
+    $("#position").prop("readonly", true);
+    $("#name").prop("readonly", true);
+    $("#link").prop("readonly", true);
+    $("#state").prop("readonly", true);
+    $("#age").prop("readonly", true);
+    $("#salary").prop("readonly", true);
+    $("#description").prop("readonly", true);
+    $("#citizen-yes").prop("disabled", true);
+    $("#citizen-no").prop("disabled", true);
+    $("#highschool").prop("disabled", true);
+    $("#associate").prop("disabled", true);
+    $("#bachelor").prop("disabled", true);
+    $("#masters").prop("disabled", true);
+    $("#doctorate").prop("disabled", true);
+
+    const query = {
+      url: `/list/${itemId}`,
+      method: "GET",
+      success: insertFormData
+    };
+    $.ajax(query);
+  });
+
+  $('.js-form-edit').on('click', event => {
+    event.preventDefault();
+    $("#position").prop("readonly", false);
+    $("#name").prop("readonly", false);
+    $("#link").prop("readonly", false);
+    $("#state").prop("readonly", false);
+    $("#age").prop("readonly", false);
+    $("#salary").prop("readonly", false);
+    $("#description").prop("readonly", false);
+    $("#citizen-yes").prop("disabled", false);
+    $("#citizen-no").prop("disabled", false);
+    $("#highschool").prop("disabled", false);
+    $("#associate").prop("disabled", false);
+    $("#bachelor").prop("disabled", false);
+    $("#masters").prop("disabled", false);
+    $("#doctorate").prop("disabled", false);
+
+    $('.js-form-edit').hide();
+    $(".js-form-submit").show();
+    $(".js-form-reset").show().html('Abort');
+  });
+
   $(".js-form-submit").on("click", event => {
     event.preventDefault();
     // fetchInput & validateInput get shared by index & portal from validateInput.js
@@ -260,48 +326,7 @@ function requestEditItem() {
 function requestViewItem() {
   let itemId = "";
 
-  $(".list").on("click", ".fa-eye", event => {
-    $(".topDiv").hide();
-    $(".listWrapper").hide();
-    $(".js-form-submit").hide();
-    $(".js-form-reset").hide();
-    $(".updateWrapper").show();
-
-    $(".warningConfirm")
-      .append(
-        `
-    	<i class="far fa-arrow-alt-circle-left fa-2x"></i>
-    	`
-      )
-      .css("flex-direction", "row");
-
-    itemId = $(event.target)
-      .parent()
-      .parent()
-      .attr("id");
-
-    $("#position").prop("readonly", true);
-    $("#name").prop("readonly", true);
-    $("#link").prop("readonly", true);
-    $("#state").prop("readonly", true);
-    $("#age").prop("readonly", true);
-    $("#salary").prop("readonly", true);
-    $("#description").prop("readonly", true);
-    $("#citizen-yes").prop("disabled", true);
-    $("#citizen-no").prop("disabled", true);
-    $("#highschool").prop("disabled", true);
-    $("#associate").prop("disabled", true);
-    $("#bachelor").prop("disabled", true);
-    $("#masters").prop("disabled", true);
-    $("#doctorate").prop("disabled", true);
-
-    const query = {
-      url: `/list/${itemId}`,
-      method: "GET",
-      success: insertFormData
-    };
-    $.ajax(query);
-  });
+  
 
   $(".warningConfirm").on("click", ".fa-arrow-alt-circle-left", event => {
     $(".updateWrapper").hide();
