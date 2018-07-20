@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="H.W.">
+  <meta name="description" content="Portal to display all departments in the collection">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>CopJob</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700|Kalam:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="databaseGrid.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="navWrapper">
+      <span class="logoWrapper">
+        <img src="logohat.png">
+        <h1><a href="/">Cop<span>Job</span></a>
+      </h1>
+      </span>
+      <nav>
+        <ul>
+          <a href="/index">
+            <li>Database</li>
+          </a>
+          <a href="/portal">
+            <li>Create</li>
+          </a>
+        </ul>
+      </nav>
+      <nav>
+        <ul>
+          <a href="/profile" class="btn btn-default btn-sm">
+            <li>Profile</li>
+          </a>
+          <a href="/logout" class="btn btn-default btn-sm">
+            <li>Logout</li>
+          </a>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <p>
+      <strong>id</strong>:
+      <%= user._id %><br>
+        <strong>email</strong>:
+        <%= user.local.email %><br>
+          <strong>password</strong>:
+          <%= user.local.password %>
+    </p>
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="validateInput.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

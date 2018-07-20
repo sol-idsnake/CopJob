@@ -1,0 +1,67 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Fira Sans", sans-serif;
+  margin: 0;
+}
+
+header {
+  background: black;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+img {
+	height: 50px;
+	margin-right: 0.5em;
+	width: auto;
+}
+
+h1 {
+	margin: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a > span {
+  color: #ffbc49;
+}
+
+form {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: .5em;
+}
+
+.navWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.logoWrapper {
+	align-items: center;
+  display: flex;
+}
+
+.js-form-submit {
+	background: linear-gradient(135deg,#fc3 20%,#ffb347 80%);
+	border: 0;
+	border-radius: 2px;
+	padding: .5em 1.75em;
+	text-decoration: none;
+}
