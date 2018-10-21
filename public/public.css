@@ -95,6 +95,7 @@ input[type="text"] {
 
 .opportunities > span {
 	font-size: 1.5em;
+	cursor: pointer;
 }
 
 .opportunities span:hover {
@@ -103,6 +104,7 @@ input[type="text"] {
 
 .opportunities > i {
 	margin-left: .25em;
+	cursor: pointer;
 }
 
 .allJobsSection {
