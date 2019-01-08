@@ -1,6 +1,7 @@
 module.exports = function(app, passport) {
 
-  app.get("/index", isLoggedIn, (req, res) => {
+  // to include a login option, pass 'isLoggedIn' as arg
+  app.get("/index", (req, res) => {
     res.sendFile("/index.html", { root: "views" });
   });
 
