@@ -1,17 +1,11 @@
-// app/routes.js
 module.exports = function(app, passport) {
-  // =====================================
-  // HOME PAGE (with login links) ========
-  // =====================================
-  // app.get('/', function(req, res) {
-  //     res.render('index.ejs'); // load the index.ejs file
-  // });
 
   app.get("/index", isLoggedIn, (req, res) => {
     res.sendFile("/index.html", { root: "views" });
   });
 
-  app.get("/portal", isLoggedIn, (req, res) => {
+  // to include a login option, pass 'isLoggedIn' as arg
+  app.get("/portal", (req, res) => {
     res.sendFile("/portal.html", { root: "views" });
   });
 
@@ -25,8 +19,7 @@ module.exports = function(app, passport) {
   });
 
   // process the login form
-  app.post(
-    "/login",
+  app.post("/login",
     passport.authenticate("local-login", {
       successRedirect: "/index", // redirect to the secure profile section
       failureRedirect: "/login", // redirect back to the signup page if there is an error
@@ -44,8 +37,7 @@ module.exports = function(app, passport) {
   });
 
   // process the signup form
-  app.post(
-    "/signup",
+  app.post("/signup",
     passport.authenticate("local-signup", {
       successRedirect: "/login",
       failureRedirect: "/signup", // redirect back to the signup page if there is an error
@@ -53,10 +45,6 @@ module.exports = function(app, passport) {
     })
   );
 
-  // =====================================
-  // PROFILE SECTION =====================
-  // =====================================
-  // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   app.get("/profile", isLoggedIn, function(req, res) {
     res.render("profile.ejs", {
@@ -64,9 +52,6 @@ module.exports = function(app, passport) {
     });
   });
 
-  // =====================================
-  // LOGOUT ==============================
-  // =====================================
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/login");
