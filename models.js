@@ -29,7 +29,7 @@ departmentSchema.methods.serialize = function() {
 };
 
 // first arg passed to model is capital and singular, whereas mongo looks for the same name in plural and
-// non-capitalized in the collections. E.G 'POST', but the collections name is 'posts'
+// non-capitalized in the collections. E.G 'Post', but the collections name is 'posts'
 const Department = mongoose.model("Department", departmentSchema);
 
 module.exports = { Department };
