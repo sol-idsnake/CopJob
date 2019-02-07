@@ -13,9 +13,8 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var session = require("express-session");
 
-// Use express.json for POST method
 app.use(express.static("public"));
-app.use(express.json());
+app.use(express.json()); // Use express.json for POST method
 
 require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan("dev")); // log every request to the console
